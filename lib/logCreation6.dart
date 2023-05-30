@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'log_creation_7.dart';
+import 'logCreation7.dart';
 
-class log_creation_6 extends StatelessWidget {
-  log_creation_6({Key? key}) : super(key: key);
+class logCreation6 extends StatelessWidget {
+  logCreation6({Key? key}) : super(key: key);
 
   var entryTimeHour=0; var entryTimeMin=0; var exitTimeHour=0; var exitTimeMin=0;
   var startPressure=0; var endPressure=0;
@@ -370,7 +370,7 @@ class log_creation_6 extends StatelessWidget {
                       onPressed: (){
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => log_creation_7()),
+                          MaterialPageRoute(builder: (context) => logCreation7()),
                         );
                       },
                     ),

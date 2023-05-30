@@ -4,8 +4,8 @@ import 'dart:io';
 
 import 'package:logbook/Upload.dart';
 
-class log_creation_9 extends StatelessWidget {
-  const log_creation_9({Key? key}) : super(key: key);
+class logCreation9 extends StatelessWidget {
+  const logCreation9({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +87,7 @@ class log_creation_9 extends StatelessWidget {
                       onPressed: (){
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => log_creation_9()),
+                          MaterialPageRoute(builder: (context) => logCreation9()),
                         );
                       },
                     ),

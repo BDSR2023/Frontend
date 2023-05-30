@@ -5,14 +5,14 @@ import 'package:http/http.dart' as http;
 
 
 
-class log_create4 extends StatefulWidget {
-  const log_create4({Key? key}) : super(key: key);
+class logCreation4 extends StatefulWidget {
+  const logCreation4({Key? key}) : super(key: key);
 
   @override
-  State<log_create4> createState() => _log_create4State();
+  State<logCreation4> createState() => _logCreation4State();
 }
 
-class _log_create4State extends State<log_create4> {
+class _logCreation4State extends State<logCreation4> {
 
   final _belt = ['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14'];
   final _pocket=['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14'];

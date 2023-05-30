@@ -5,14 +5,14 @@ import 'package:http/http.dart' as http;
 
 
 
-class log_create5 extends StatefulWidget {
-  const log_create5({Key? key}) : super(key: key);
+class logCreation5 extends StatefulWidget {
+  const logCreation5({Key? key}) : super(key: key);
 
   @override
-  State<log_create5> createState() => _log_create5State();
+  State<logCreation5> createState() => _logCreation5State();
 }
 
-class _log_create5State extends State<log_create5> {
+class _logCreation5State extends State<logCreation5> {
   Color _buttonColor1 = Colors.blue;
   Color _buttonColor2 = Colors.blue;
   Color _buttonColor3 = Colors.blue;
