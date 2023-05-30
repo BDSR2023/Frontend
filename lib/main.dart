@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:logbook/profile.dart';
 import 'home_page.dart';
 import 'login_page.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'logCreation1.dart';
+import 'logCreation2.dart';
+import 'logCreation3.dart';
+import 'logCreation4.dart';
+import 'logCreation5.dart';
+import 'logCreationBase.dart';
+
+
 
 void main() {
   // 웹 환경에서 카카오 로그인을 정상적으로 완료하려면 runApp() 호출 전 아래 메서드 호출 필요
@@ -18,17 +29,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-          textTheme: TextTheme(
-              bodyText2: TextStyle(
-                fontSize: 30,
-                color: Colors.white,
-              )
-          )
-      ),
-      home: LoginPage(),
-    );
+    return logCreationsBase();
   }
 }
-
