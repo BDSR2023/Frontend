@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'log_creation_9.dart';
+import 'logCreation9.dart';
 
-class log_creation_8 extends StatelessWidget {
-  const log_creation_8({Key? key}) : super(key: key);
+class logCreation8 extends StatelessWidget {
+  const logCreation8({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -216,7 +216,7 @@ class log_creation_8 extends StatelessWidget {
                       onPressed: (){
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => log_creation_9()),
+                          MaterialPageRoute(builder: (context) => logCreation9()),
                         );
                       },
                     ),

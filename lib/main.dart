@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:logbook/profile.dart';
-import 'home_page.dart';
-import 'login_page.dart';
+import 'homePage.dart';
+import 'loginPage.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'logCreation1.dart';
-import 'logCreation2.dart';
-import 'logCreation3.dart';
-import 'logCreation4.dart';
-import 'logCreation5.dart';
 import 'logCreationBase.dart';
 
 
@@ -17,8 +12,8 @@ import 'logCreationBase.dart';
 import 'package:flutter/material.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 
-import 'HomePage.dart';
-import 'login_page.dart';
+import 'homePage.dart';
+import 'loginPage.dart';
 import 'prac.dart';
 
 
@@ -72,7 +67,7 @@ class ToHomePage extends StatelessWidget {
             )
         ),
       ),
-      home: HomePage(),
+      home: homePage(),
     );
   }
 }

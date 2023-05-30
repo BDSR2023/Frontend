@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
-import 'package:logbook/HomePage.dart';
+import 'package:logbook/homePage.dart';
 
 
 class LoginPage extends StatelessWidget {
@@ -99,7 +99,7 @@ class LoginPage extends StatelessWidget {
                             if (await AuthApi.instance.hasToken()) {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => HomePage()),
+                                MaterialPageRoute(builder: (context) => homePage()),
                               );
                             }
                           }
