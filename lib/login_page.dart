@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
+import 'package:logbook/HomePage.dart';
+
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -50,24 +52,25 @@ class LoginPage extends StatelessWidget {
               child: Column(
                 children: [
                   Text('SNS 계정으로 간편 가입하기', style: TextStyle(
-                      fontSize: 15, color: Colors.black,
+                    fontSize: 15, color: Colors.black,
                   ),),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       ElevatedButton(child: Text('카카오 로그인'),
                           onPressed: () async {
+                            print(await isKakaoTalkInstalled());
                             if (await isKakaoTalkInstalled()) {
                               try {
-                                await UserApi.instance.loginWithKakaoTalk();
-                                print('카카오톡으로 로그인 성공');
+                                OAuthToken token = await UserApi.instance.loginWithKakaoTalk();
+                                print('카카오톡으로 로그인 성공 ${token.accessToken}');
                                 _get_user_info();
                               } catch (error) {
                                 print('카카오톡으로 로그인 실패 $error');
                                 // 카카오톡에 연결된 카카오계정이 없는 경우, 카카오계정으로 로그인
                                 try {
-                                  await UserApi.instance.loginWithKakaoAccount();
-                                  print('카카오계정으로 로그인 성공');
+                                  OAuthToken token = await UserApi.instance.loginWithKakaoAccount();
+                                  print('카카오계정으로 로그인 성공 ${token.accessToken}');
                                   _get_user_info();
                                 } catch (error) {
                                   print('카카오계정으로 로그인 실패 $error');
@@ -75,12 +78,29 @@ class LoginPage extends StatelessWidget {
                               }
                             } else {
                               try {
-                                await UserApi.instance.loginWithKakaoAccount();
-                                print('카카오계정으로 로그인 성공');
+                                OAuthToken token = await UserApi.instance.loginWithKakaoAccount();
+                                print('카카오계정으로 로그인 성공 ${token.accessToken}');
                                 _get_user_info();
                               } catch (error) {
                                 print('카카오계정으로 로그인 실패 $error');
                               }
+                            }
+                            try {
+                              AccessTokenInfo tokenInfo = await UserApi.instance.accessTokenInfo();
+                              print('토큰 정보 보기 성공'
+                                  '\n회원정보: ${tokenInfo.id}'
+                                  '\n만료시간: ${tokenInfo.expiresIn} 초');
+                            } catch (error) {
+                              print('토큰 정보 보기 실패 $error');
+                            }
+
+                            //로그인 후, 홈페이지로 가기. (토큰을 받았다면)
+                            //못 받았으면 돌아가기.
+                            if (await AuthApi.instance.hasToken()) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => HomePage()),
+                              );
                             }
                           }
                       )
