@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class profile_page extends StatefulWidget {
-  const profile_page({Key? key}) : super(key: key);
+class Profile extends StatefulWidget {
+  const Profile({Key? key}) : super(key: key);
 
   @override
-  State<profile_page> createState() => _profile_pageState();
+  State<Profile> createState() => _ProfileState();
 }
 
-class _profile_pageState extends State<profile_page> {
+class _ProfileState extends State<Profile> {
 
   int a=6;
   var scroll= ScrollController();
