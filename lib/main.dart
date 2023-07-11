@@ -48,7 +48,7 @@ class ToLoginPage extends StatelessWidget {
               )
           )
       ),
-      home: LoginPage(),
+      home: homePage(),
     );
   }
 }

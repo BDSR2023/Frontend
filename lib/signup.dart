@@ -1,17 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 void main() {
   runApp(MaterialApp(
-      home: MyApp(),
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(scaffoldBackgroundColor: Colors.lightBlueAccent,
-      )));
+    home: MyApp(),
+    debugShowCheckedModeBanner: false,
+  ));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  List<String> tags = [];
+
+  TextEditingController tagController = TextEditingController();
+
+  void addTag(String tag) {
+    if (tag.trim().isNotEmpty) {
+      setState(() {
+        tags.add(tag);
+      });
+      tagController.clear();
+    }
+  }
+
+  void removeTag(String tag) {
+    setState(() {
+      tags.remove(tag);
+    });
+  }
+
+  @override
+  void dispose() {
+    tagController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +67,6 @@ class MyApp extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: Container(
-              color: Colors.lightBlueAccent,
               height: MediaQuery.of(context).size.height,
               child: Column(
                 children: [
@@ -61,7 +85,6 @@ class MyApp extends StatelessWidget {
                       Expanded(
                         child: Container(
                           margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
-
                           child: TextField(
                             maxLength: 12,
                             decoration: InputDecoration(
@@ -75,10 +98,13 @@ class MyApp extends StatelessWidget {
                       ),
                       Container(
                         margin: EdgeInsets.fromLTRB(0, 10, 20, 20),
-                        height: 60, // 높이를 60으로 설정
+                        height: 60,
                         child: ElevatedButton(
                           onPressed: () {},
-                          child: Text('중복확인',style: TextStyle(color: Colors.black),),
+                          child: Text(
+                            '중복확인',
+                            style: TextStyle(color: Colors.black),
+                          ),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
                           ),
@@ -113,20 +139,23 @@ class MyApp extends StatelessWidget {
                       children: [
                         Container(
                             margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                            child: Text('태그')
-                        ),
+                            child: Text('태그')),
                         Container(
-                            width: MediaQuery.of(context).size.width/2.15,
-                            height: 30,
-                            decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.black,
-                                  width: 0.5,
-                                ),
-                                color: Colors.white
-                            ),
-                            child: Text('')
-                        )
+                          width: MediaQuery.of(context).size.width / 2.15,
+                          height: 30,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: tags.length,
+                            itemBuilder: (context, index) {
+                              final tag = tags[index];
+                              return Chip(
+                                label: Text(tag),
+                                onDeleted: () => removeTag(tag),
+                                deleteIcon: Icon(Icons.close),
+                              );
+                            },
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -136,8 +165,8 @@ class MyApp extends StatelessWidget {
                       Expanded(
                         child: Container(
                           margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
-
                           child: TextField(
+                            controller: tagController,
                             decoration: InputDecoration(
                               filled: true,
                               fillColor: Colors.white,
@@ -148,10 +177,17 @@ class MyApp extends StatelessWidget {
                       ),
                       Container(
                         margin: EdgeInsets.fromLTRB(0, 0, 20, 0),
-                        height: 60, // 높이를 60으로 설정
+                        height: 60,
                         child: ElevatedButton(
-                          onPressed: () {},
-                          child: Text('추가',style: TextStyle(color: Colors.black),),
+                          onPressed: () {
+                            if (tagController.text.trim().isNotEmpty) {
+                              addTag(tagController.text);
+                            }
+                          },
+                          child: Text(
+                            '추가',
+                            style: TextStyle(color: Colors.black),
+                          ),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
                           ),
@@ -164,9 +200,8 @@ class MyApp extends StatelessWidget {
                     children: [
                       Container(
                         margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                        child:
-                        Text('태그는 다른사람이 나를 검색할때 사용됩니다.'),
-                      )
+                        child: Text('태그는 다른사람이 나를 검색할때 사용됩니다.'),
+                      ),
                     ],
                   ),
                   Row(
@@ -174,25 +209,24 @@ class MyApp extends StatelessWidget {
                     children: [
                       Container(
                         margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                        child:
-                        Text('ex)단체명, 레밸, 동아리, 동호회, 소속센터'),
-                      )
+                        child: Text('ex)단체명, 레밸, 동아리, 동호회, 소속센터'),
+                      ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
       bottomNavigationBar: BottomAppBar(
         elevation: 0.0,
-        color: Colors.lightBlueAccent,
+        color: Colors.white,
         child: Container(
           margin: EdgeInsets.all(20),
           height: 50,
           child: ElevatedButton(
-            onPressed: (){},
+            onPressed: () {},
             child: Text('가입하기'),
           ),
         ),
