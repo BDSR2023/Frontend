@@ -1,18 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:logbook/profile.dart';
-import 'homePage.dart';
-import 'loginPage.dart';
-import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'logCreationBase.dart';
-
-
-
-import 'package:flutter/material.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 
-import 'homePage.dart';
+import 'HomePage.dart';
 import 'loginPage.dart';
 import 'prac.dart';
 
@@ -60,12 +49,12 @@ class ToHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        textTheme: TextTheme(
-            bodyText2: TextStyle(
-              fontSize: 30,
-              color: Colors.white,
-            )
-        ),
+          textTheme: TextTheme(
+              bodyText2: TextStyle(
+                fontSize: 30,
+                color: Colors.white,
+              )
+          ),
       ),
       home: homePage(),
     );
@@ -73,6 +62,7 @@ class ToHomePage extends StatelessWidget {
 }
 
 
+<<<<<<< HEAD
 
 
 
@@ -95,3 +85,5 @@ class ToHomePage extends StatelessWidget {
 //     return logCreationsBase();
 //   }
 // }
+=======
+>>>>>>> a554e1b4b0f805a87d3e259d9a295a2ae118f2cc

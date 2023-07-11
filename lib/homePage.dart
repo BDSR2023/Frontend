@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:logbook/logCreationBase.dart';
+import 'package:logbook/logCreation6.dart';
 import 'profile.dart';
 
 
@@ -7,10 +7,10 @@ class homePage extends StatefulWidget {
   const homePage({Key? key}) : super(key: key);
 
   @override
-  State<homePage> createState() => _homePageState();
+  State<homePage> createState() => _HomePageState();
 }
 
-class _homePageState extends State<homePage> {
+class _HomePageState extends State<homePage> {
 
   var diveLevel; var diveTimes = 13;
 
@@ -34,7 +34,7 @@ class _homePageState extends State<homePage> {
                       onPressed: (){
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => profile_page()),
+                          MaterialPageRoute(builder: (context) => Profile()),
                         );
                       },
                     )
@@ -111,7 +111,7 @@ class _homePageState extends State<homePage> {
                           onPressed: (){
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => logCreationsBase()),
+                              MaterialPageRoute(builder: (context) => logCreation6()),
                             );
                           },
                         )
