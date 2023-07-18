@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:logbook/profile.dart';
-import 'homePage.dart';
-import 'loginPage.dart';
-import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:logbook/HomePage.dart';
 import 'logCreation1.dart';
 import 'logCreation2.dart';
 import 'logCreation3.dart';
@@ -13,7 +8,7 @@ import 'logCreation5.dart';
 import 'logCreation6.dart';
 import 'logCreation7.dart';
 import 'logCreation8.dart';
-import 'logCreation9.dart';
+import 'resultPage.dart';
 
 
 class logCreationsBase extends StatefulWidget {
@@ -33,9 +28,8 @@ class _logCreationsBaseState extends State<logCreationsBase> {
     logCreation4(),
     logCreation5(),
     logCreation6(),
-    logCreation7(),
     logCreation8(),
-    logCreation9(),
+    logCreation7(),
   ];
 
   void _changeBody(int index) {
@@ -48,40 +42,58 @@ class _logCreationsBaseState extends State<logCreationsBase> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(scaffoldBackgroundColor: Color(0xffd1dce6)),
+      theme: ThemeData(scaffoldBackgroundColor: Colors.white),
       home: Scaffold(
         body: _logCreatePages[_currentIndex],
         bottomNavigationBar: BottomAppBar(
-          color: Color(0xffd1dce6),
+          color: Colors.white,
           elevation: 0.0,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                child: IconButton(
-                  onPressed: () {
+          child: Container(
+            height: 60,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                  onTap: () {
                     int newIndex = _currentIndex - 1;
                     if (newIndex < 0) {
-                      newIndex = _logCreatePages.length - 1;
+                      Navigator.pop(context);
                     }
-                    _changeBody(newIndex);
+                    else {
+                      _changeBody(newIndex);
+                    }
                   },
-                  icon: Icon(Icons.arrow_back_ios),
+                  child: Container(
+                    width: 60, height: 60,
+                    child: Icon(
+                      Icons.arrow_back_ios_rounded,
+                      size: 50, color: Colors.grey,
+                    ),
+                  ),
                 ),
-              ),
-              Container(
-                child: IconButton(
-                  onPressed: () {
+                GestureDetector(
+                  onTap: () {
                     int newIndex = _currentIndex + 1;
                     if (newIndex >= _logCreatePages.length) {
-                      newIndex = 0;
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => homePage()),
+                      );
                     }
-                    _changeBody(newIndex);
+                    else {
+                      _changeBody(newIndex);
+                    }
                   },
-                  icon: Icon(Icons.arrow_forward_ios),
+                  child: Container(
+                    width: 60, height: 60,
+                    child: Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      size: 50, color: Colors.grey,
+                    ),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

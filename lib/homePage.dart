@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:logbook/logCreation6.dart';
+import 'package:logbook/logCreationBase.dart';
 import 'profile.dart';
 
 
@@ -111,7 +112,7 @@ class _HomePageState extends State<homePage> {
                           onPressed: (){
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => logCreation6()),
+                              MaterialPageRoute(builder: (context) => logCreationsBase()),
                             );
                           },
                         )
@@ -210,7 +211,13 @@ class _HomePageState extends State<homePage> {
                           margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
                           child: Column(
                             children: [
-                              Icon(Icons.leaderboard_sharp, size: 100,),
+                              SizedBox(
+                                height: 100, width: 100,
+                                child: Image.asset(
+                                  'assets/openwater.png',
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
                               Text('LEVEL', style: TextStyle(
                                 fontSize: 20, color: Colors.black
                               ),)

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'logCreation8.dart';
 
 class logCreation7 extends StatelessWidget {
   logCreation7({Key? key}) : super(key: key);
@@ -38,36 +37,6 @@ class logCreation7 extends StatelessWidget {
             )
           ],
         ),
-      ),
-      bottomNavigationBar: BottomAppBar(
-          color: Color(0xff6FA9E5), elevation: 0.0,
-          child: Container(
-              height: 60,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                      margin: EdgeInsets.fromLTRB(20, 0, 0, 20),
-                      child: IconButton(
-                        icon: Icon(Icons.chevron_left_rounded,size: 50,),
-                        onPressed: (){Navigator.pop(context); },
-                      )
-                  ),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(0, 0, 40, 20),
-                    child: IconButton(
-                      icon: Icon(Icons.navigate_next_rounded, size: 50),
-                      onPressed: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => logCreation8()),
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              )
-          )
       ),
     );
   }

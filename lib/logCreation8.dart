@@ -1,15 +1,68 @@
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'logCreation9.dart';
 
-class logCreation8 extends StatelessWidget {
+class logCreation8 extends StatefulWidget {
   const logCreation8({Key? key}) : super(key: key);
+
+  @override
+  State<logCreation8> createState() => _logCreation8State();
+}
+
+class _logCreation8State extends State<logCreation8> {
+
+  var instructorColor = 0xffd9e7fa;
+  var masterColor = 0xffd9e7fa;
+  var instructorTextColor = 0xff000000;
+  var masterTextColor = 0xff000000;
+
+  var selectedGuide = 'none';
+
+  void toInstructor() {
+    setState(() {
+      instructorColor = 0xff6ba4e9;
+      masterColor = 0xffd9e7fa;
+      instructorTextColor = 0xffffffff;
+      masterTextColor = 0xff000000;
+    });
+    selectedGuide = '강사';
+  }
+  void toMaster() {
+    setState(() {
+      instructorColor = 0xffd9e7fa;
+      masterColor = 0xff6ba4e9;
+      instructorTextColor = 0xff000000;
+      masterTextColor = 0xffffffff;
+    });
+    selectedGuide = '마스터';
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      if(selectedGuide == 'none') {
+        instructorColor = 0xffd9e7fa;
+        masterColor = 0xffd9e7fa;
+        instructorTextColor = 0xff000000;
+        masterTextColor = 0xff000000;
+      } else if (selectedGuide == '강사') {
+        instructorColor = 0xff6ba4e9;
+        masterColor = 0xffd9e7fa;
+        instructorTextColor = 0xffffffff;
+        masterTextColor = 0xff000000;
+      } else {
+        instructorColor = 0xffd9e7fa;
+        masterColor = 0xff6ba4e9;
+        instructorTextColor = 0xff000000;
+        masterTextColor = 0xffffffff;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Color(0xffECF3FD),
       body: Container(
         padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
         child: Column(
@@ -30,7 +83,7 @@ class logCreation8 extends StatelessWidget {
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(2),
-                              color: Color(0xffDAE8F8),
+                              color: Color(0xffEBF2FB),
                             ),
                             height: 35,
                             child: TextField(style: TextStyle(fontSize: 20),
@@ -59,7 +112,7 @@ class logCreation8 extends StatelessWidget {
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(2),
-                              color: Color(0xffDAE8F8),
+                              color: Color(0xffEBF2FB),
                             ),
                             height: 35,
                             child: TextField(style: TextStyle(fontSize: 20),
@@ -91,7 +144,7 @@ class logCreation8 extends StatelessWidget {
                                 margin: EdgeInsets.fromLTRB(0, 5, 0, 5),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(2),
-                                  color: Color(0xffDAE8F8),
+                                  color: Color(0xffEBF2FB),
                                 ),
                                 height: 30,
                                 child: TextField(
@@ -105,9 +158,19 @@ class logCreation8 extends StatelessWidget {
                               height: 30, width: 100,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(2),
-                                color: Color(0xff6FA9E5),
+                                color: Color(0xffd9e7fa),
                               ),
-                              child: Text('강사', style: TextStyle(fontSize: 20, color: Colors.white), textAlign: TextAlign.center,
+                              child: ElevatedButton(
+                                child: Text('강사', style: TextStyle(fontSize: 20, color: Color(instructorTextColor)),
+                                  textAlign: TextAlign.center,
+                                ),
+                                onPressed: () {
+                                  toInstructor();
+                                },
+                                style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all(Color(instructorColor)),
+                                  elevation: MaterialStateProperty.all(0),
+                                ),
                               ),
                             )
                           ],
@@ -118,7 +181,7 @@ class logCreation8 extends StatelessWidget {
                               child: Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(2),
-                                  color: Color(0xffDAE8F8),
+                                  color: Color(0xffEBF2FB),
                                 ),
                                 height: 30,
                                 child: TextField(
@@ -128,12 +191,23 @@ class logCreation8 extends StatelessWidget {
                               ),
                             ),
                             Container(
+                              margin: EdgeInsets.fromLTRB(0, 5, 0, 5),
                               height: 30, width: 100,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(2),
-                                color: Color(0xffC9DDF6),
+                                color: Color(0xffd9e7fa),
                               ),
-                              child: Text('마스터', style: TextStyle(fontSize: 20, color: Colors.white,),textAlign: TextAlign.center,
+                              child: ElevatedButton(
+                                child: Text('마스터', style: TextStyle(fontSize: 20, color: Color(masterTextColor)),
+                                  textAlign: TextAlign.center,
+                                ),
+                                onPressed: () {
+                                  toMaster();
+                                },
+                                style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all(Color(masterColor)),
+                                  elevation: MaterialStateProperty.all(0),
+                                ),
                               ),
                             )
                           ],
@@ -153,77 +227,141 @@ class logCreation8 extends StatelessWidget {
               children: [
                 Text('서명',style: TextStyle(color: Colors.black, fontSize: 20),),
                 Container(
+                  height: 130, width: double.infinity,
+                  padding: EdgeInsets.fromLTRB(0, 45, 0, 0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Color(0xff6FA9E5),
                   ),
-                  height: 130,
+                  child: GestureDetector(
+                      child: Text('자유롭게 서명을 해주세요',style: TextStyle(
+                        color: Colors.white, fontSize: 20,
+                      ),textAlign: TextAlign.center,),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => logCreation9()),
+                      );
+                    },
+                  ),
                 ),
-                Text('스탬프',style: TextStyle(color: Colors.black, fontSize: 20),),
                 Row(
                   children: [
-                    Container(
-                      padding: EdgeInsets.fromLTRB(0, 0, 0, 0), margin: EdgeInsets.fromLTRB(5, 0, 10, 0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(2),
-                        color: Color(0xff6FA9E5),
-                      ),
-                      height: 40, width: 130,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xff6FA9E5)
-                        ),
-                        child: Text('CLICK!', style: TextStyle(fontSize: 20, color: Colors.white,),textAlign: TextAlign.center,),
-                          onPressed: () async {
-                            var picker = ImagePicker();
-                            var image = await picker.pickImage(source: ImageSource.gallery);
-                          }
-                      ),
-                      //Text('CLICK!', style: TextStyle(fontSize: 20, color: Colors.white,),textAlign: TextAlign.center,),
-                    ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('*최근에 찍은 스탬프 사진을', style: TextStyle(fontSize: 13, color: Colors.black,)),
-                        Text('업로드 할 수 있어요.', style: TextStyle(fontSize: 13, color: Colors.black,)),
+                        Text('스탬프 이미지 첨부',style: TextStyle(color: Colors.black, fontSize: 20),),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: Color(0xff6FA9E5),
+                          ),
+                          height: 110, width: 210,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Color(0xff6FA9E5)
+                            ),
+                            child: Column(
+                              children: [
+                                Container(
+                                  height: 55, width: 180,
+                                  padding: EdgeInsets.fromLTRB(0, 10, 0, 0), margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(3),
+                                    color: Color(0xffeaf2fc),
+                                  ),
+                                  child: Text('CLICK!', style: TextStyle(fontSize: 24, color: Colors.black,),textAlign: TextAlign.center,),
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('*최근에 찍은 스탬프 사진을', style: TextStyle(fontSize: 13, color: Colors.white,)),
+                                    Text('업로드 할 수 있어요.', style: TextStyle(fontSize: 13, color: Colors.white,)),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => logCreation9()),
+                              );
+                            },
+                          ),
+                        ),
                       ],
-                    )
+                    ),
+                    Expanded(
+                      child: SizedBox(),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text('다이빙 사진 추가',style: TextStyle(color: Colors.black, fontSize: 20),),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: Color(0xff6FA9E5),
+                          ),
+                          height: 110, width: 210,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Color(0xff6FA9E5)
+                            ),
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Container(
+                                      height: 55, width: 55,
+                                      margin: EdgeInsets.fromLTRB(0, 10, 5, 0),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(3),
+                                        color: Color(0xffeaf2fc),
+                                      ),
+                                    ),
+                                    Container(
+                                      height: 55, width: 55,
+                                      margin: EdgeInsets.fromLTRB(0, 10, 5, 0),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(3),
+                                        color: Color(0xffeaf2fc),
+                                      ),
+                                    ),
+                                    Container(
+                                      height: 55, width: 55,
+                                      margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(3),
+                                        color: Color(0xffeaf2fc),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Icon(Icons.photo_camera_rounded, size: 45,)
+                                  ],
+                                ),
+                              ],
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => logCreation9()),
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ],
             ),
           ],
         ),
-      ),
-      bottomNavigationBar: BottomAppBar(
-          color: Color(0xffECF3FD), elevation: 0.0,
-          child: Container(
-              height: 60,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                      margin: EdgeInsets.fromLTRB(20, 0, 0, 20),
-                      child: IconButton(
-                        icon: Icon(Icons.chevron_left_rounded,size: 50,),
-                        onPressed: (){Navigator.pop(context); },
-                      )
-                  ),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(0, 0, 40, 20),
-                    child: IconButton(
-                      icon: Icon(Icons.navigate_next_rounded, size: 50),
-                      onPressed: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => logCreation9()),
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              )
-          )
       ),
     );
   }
