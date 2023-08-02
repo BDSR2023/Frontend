@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:logbook/myDrawingBoard.dart';
+import 'signPage.dart';
 import 'logCreation9.dart';
 import 'package:provider/provider.dart';
 import 'logCreationManager.dart';
@@ -74,7 +76,7 @@ class _logCreation8State extends State<logCreation8> {
             fontFamily: 'GmarketSansTTF', fontWeight: FontWeight.w500, color: Colors.black
         ),
         child: Container(
-          padding: EdgeInsets.fromLTRB(30, 0, 30, 10),
+          padding: EdgeInsets.fromLTRB(25, 0, 25, 10),
           child: Column(
             children: [
               Container(
@@ -256,7 +258,7 @@ class _logCreation8State extends State<logCreation8> {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => logCreation9()),
+                          MaterialPageRoute(builder: (context) => signPage()),
                         );
                       },
                     ),
@@ -279,13 +281,14 @@ class _logCreation8State extends State<logCreation8> {
                             height: 110, width: MediaQuery.of(context).size.width/2.4,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                  backgroundColor: Color(0xff6FA9E5)
+                                  backgroundColor: Color(0xff6FA9E5),
+                                padding: EdgeInsets.fromLTRB(5, 0, 3, 0)
                               ),
                               child: Column(
                                 children: [
                                   Container(
                                     height: 55, width: MediaQuery.of(context).size.width/2.8,
-                                    padding: EdgeInsets.fromLTRB(0, 10, 0, 0), margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                                    padding: EdgeInsets.fromLTRB(0, 12, 0, 0), margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(3),
                                       color: Color(0xffeaf2fc),
@@ -297,7 +300,7 @@ class _logCreation8State extends State<logCreation8> {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text('*최근에 찍은 스탬프 사진을\n업로드 할 수 있어요.',
-                                          style: TextStyle(fontSize: 11, color: Colors.white,fontFamily: 'GmarketSansTTF',)),
+                                          style: TextStyle(fontSize: MediaQuery.of(context).size.width/32, color: Colors.white,fontFamily: 'GmarketSansTTF',)),
                                     ],
                                   ),
                                 ],
@@ -312,9 +315,7 @@ class _logCreation8State extends State<logCreation8> {
                           ),
                         ],
                       ),
-                      Expanded(
-                        child: SizedBox(),
-                      ),
+                      SizedBox(width: MediaQuery.of(context).size.width/100,),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
@@ -328,14 +329,15 @@ class _logCreation8State extends State<logCreation8> {
                             height: 110, width: MediaQuery.of(context).size.width/2.4,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                  backgroundColor: Color(0xff6FA9E5)
+                                  backgroundColor: Color(0xff6FA9E5),
+                                padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width/100, 0, MediaQuery.of(context).size.width/100, 0)
                               ),
                               child: Column(
                                 children: [
                                   Row(
                                     children: [
                                       Container(
-                                        height: 55, width: 55,
+                                        height: MediaQuery.of(context).size.width/8.2, width: MediaQuery.of(context).size.width/8.2,
                                         margin: EdgeInsets.fromLTRB(0, 10, 5, 0),
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(3),
@@ -343,7 +345,7 @@ class _logCreation8State extends State<logCreation8> {
                                         ),
                                       ),
                                       Container(
-                                        height: 55, width: 55,
+                                        height: MediaQuery.of(context).size.width/8.2, width: MediaQuery.of(context).size.width/8.2,
                                         margin: EdgeInsets.fromLTRB(0, 10, 5, 0),
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(3),
@@ -351,7 +353,7 @@ class _logCreation8State extends State<logCreation8> {
                                         ),
                                       ),
                                       Container(
-                                        height: 55, width: 55,
+                                        height: MediaQuery.of(context).size.width/8.2, width: MediaQuery.of(context).size.width/8.2,
                                         margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(3),
