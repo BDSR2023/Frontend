@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'logCreationManager.dart';
+
+
 
 class logCreation6 extends StatefulWidget {
   logCreation6({Key? key}) : super(key: key);
@@ -8,20 +12,6 @@ class logCreation6 extends StatefulWidget {
 }
 
 class _logCreation6State extends State<logCreation6> {
-  var entryTimeHour = '0';
-  var entryTimeMin = '0';
-  var exitTimeHour = '0';
-  var exitTimeMin = '0';
-  var startPressure = '0';
-  var endPressure = '0';
-  var averageDepth = '0.0';
-  var maxDepth = '0.0';
-  var safetyStop = '0';
-
-  var deepStopDepth1 = '0.0';
-  var deepStopMin1 = '0';
-  var deepStopDepth2 = '0.0';
-  var deepStopMin2 = '0';
 
   final _hours = ['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19'
     ,'20','21','22','23','24'];
@@ -37,192 +27,134 @@ class _logCreation6State extends State<logCreation6> {
     '30.0', '30.5', '31.0', '31.5', '32.0', '32.5', '33.0', '33.5', '34.0', '34.5', '35.0', '35.5', '36.0', '36.5', '37.0', '37.5', '38.0', '38.5', '39.0', '39.5',
     '40.0'];
 
+  var entryTimeHour = '0';
+  var entryTimeMin = '0';
+  var exitTimeHour = '0';
+  var exitTimeMin = '0';
+  var startPressure = '0';
+  var endPressure = '0';
+  var averageDepth = '0.0';
+  var maxDepth = '0.0';
+
+  var safetyStop = '0';
+  var deepStopDepth1 = '0.0';
+  var deepStopMin1 = '0';
+  var deepStopDepth2 = '0.0';
+  var deepStopMin2 = '0';
+
+  @override
+  void initState() {
+    super.initState();
+    final logCreationManager = Provider.of<LogCreationManager>(context, listen: false);
+
+    entryTimeHour = logCreationManager.entryTimeHour;
+    entryTimeMin = logCreationManager.entryTimeMin;
+    exitTimeHour = logCreationManager.exitTimeHour;
+    exitTimeMin = logCreationManager.exitTimeMin;
+    startPressure = logCreationManager.startPressure;
+    endPressure = logCreationManager.endPressure;
+    averageDepth = logCreationManager.averageDepth;
+    maxDepth = logCreationManager.maxDepth;
+
+    safetyStop = logCreationManager.safetyStop;
+    deepStopDepth1 = logCreationManager.deepStopDepth1;
+    deepStopMin1 = logCreationManager.deepStopMin1;
+    deepStopDepth2 = logCreationManager.deepStopDepth2;
+    deepStopMin2 = logCreationManager.deepStopMin2;
+  }
+
 
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
-        child: Column(
-          children: [
-            Flexible(
-              child: Container(
+    final logCreationManager = Provider.of<LogCreationManager>(context);
 
+    return Scaffold(
+      body: DefaultTextStyle(
+        style: TextStyle(
+            fontFamily: 'GmarketSansTTF', fontWeight: FontWeight.w500, color: Colors.black
+        ),
+        child: Container(
+          padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
+          child: Column(
+            children: [
+              SizedBox(
+                height: 50,
               ),
-            ),
-            Flexible(
-              flex: 2,
-              child: Row(
+              Row(
                 children: [
                   Flexible(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('입수 시간',style: TextStyle(fontFamily: "GmarketSansTTF", color: Colors.black, fontSize: 20),),
-                        Container(
-                          margin: EdgeInsets.fromLTRB(5, 5, 0, 0),
-                          child: Row(
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(2),
-                                  color: Color(0xffEBF2FB),
+                        Text('입수 시간', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                        Text(''),
+                        Row(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                color: Color(0xffEBF2FB),
+                              ),
+                              padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                              height: 40, width: MediaQuery.of(context).size.width/7.5,
+                              child: DropdownButton(
+                                value: entryTimeHour,
+                                items: _hours.map((e) => DropdownMenuItem(
+                                  value: e, // 선택 시 onChanged 를 통해 반환할 value
+                                  child: Text(e),
+                                ))
+                                    .toList(),
+                                onChanged: (value) { // items 의 DropdownMenuItem 의 value 반환
+                                  setState(() {
+                                    logCreationManager.updateEntryTimeHour(value!);
+                                    entryTimeHour = value;
+                                  });
+                                },
+                                style: TextStyle(
+                                    fontSize: 15, color: Colors.black,
                                 ),
-                                height: 30, width: 45,
-                                child: DropdownButton(
-                                  value: entryTimeHour,
-                                  items: _hours.map((e) => DropdownMenuItem(
-                                    value: e, // 선택 시 onChanged 를 통해 반환할 value
-                                    child: Text(e),
-                                  ))
-                                      .toList(),
-                                  onChanged: (value) { // items 의 DropdownMenuItem 의 value 반환
-                                    setState(() {
-                                      entryTimeHour = value!;
-                                    });
-                                  },
-                                  underline: SizedBox.shrink(),
-                                )
-                              ),
-                              SizedBox(
-                                child: Text('시',style: TextStyle(color: Colors.black, fontSize: 20),),
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(2),
-                                  color: Color(0xffEBF2FB),
-                                ),
-                                height: 30, width: 45,
-                                child: DropdownButton(
-                                  value: entryTimeMin,
-                                  items: _mins.map((e) => DropdownMenuItem(
-                                    value: e, // 선택 시 onChanged 를 통해 반환할 value
-                                    child: Text(e),
-                                  ))
-                                      .toList(),
-                                  onChanged: (value) { // items 의 DropdownMenuItem 의 value 반환
-                                    setState(() {
-                                      entryTimeMin = value!;
-                                    });
-                                  },
-                                  underline: SizedBox.shrink(),
-                                )
-                              ),
-                              SizedBox(
-                                child: Text('분',style: TextStyle(color: Colors.black, fontSize: 20),),
+                                underline: SizedBox.shrink(),
                               )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Flexible(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('출수 시간',style: TextStyle(color: Colors.black, fontSize: 20),),
-                        Container(
-                          margin: EdgeInsets.fromLTRB(5, 5, 0, 0),
-                          child: Row(
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(2),
-                                  color: Color(0xffEBF2FB),
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width/80,
+                            ),
+                            Text('시',style: TextStyle(color: Colors.black, fontSize: 15),),
+                            SizedBox(
+                              width: 8,
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(2),
+                                color: Color(0xffEBF2FB),
+                              ),
+                              padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                              height: 40, width: MediaQuery.of(context).size.width/7.5,
+                              child: DropdownButton(
+                                value: entryTimeMin,
+                                items: _mins.map((e) => DropdownMenuItem(
+                                  value: e, // 선택 시 onChanged 를 통해 반환할 value
+                                  child: Text(e),
+                                ))
+                                    .toList(),
+                                onChanged: (value) { // items 의 DropdownMenuItem 의 value 반환
+                                  setState(() {
+                                    logCreationManager.updateEntryTimeMin(value!);
+                                    entryTimeMin = value;
+                                  });
+                                },
+                                style: TextStyle(
+                                  fontSize: 15, color: Colors.black,
                                 ),
-                                height: 30, width: 45,
-                                child: DropdownButton(
-                                  value: exitTimeHour,
-                                  items: _hours.map((e) => DropdownMenuItem(
-                                    value: e, // 선택 시 onChanged 를 통해 반환할 value
-                                    child: Text(e),
-                                  ))
-                                      .toList(),
-                                  onChanged: (value) { // items 의 DropdownMenuItem 의 value 반환
-                                    setState(() {
-                                      exitTimeHour = value!;
-                                    });
-                                  },
-                                  underline: SizedBox.shrink(),
-                                )
-                              ),
-                              SizedBox(
-                                child: Text('시',style: TextStyle(color: Colors.black, fontSize: 20),),
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(2),
-                                  color: Color(0xffEBF2FB),
-                                ),
-                                height: 30, width: 45,
-                                child: DropdownButton(
-                                  value: exitTimeMin,
-                                  items: _mins.map((e) => DropdownMenuItem(
-                                    value: e, // 선택 시 onChanged 를 통해 반환할 value
-                                    child: Text(e),
-                                  ))
-                                      .toList(),
-                                  onChanged: (value) { // items 의 DropdownMenuItem 의 value 반환
-                                    setState(() {
-                                      exitTimeMin = value!;
-                                    });
-                                  },
-                                  underline: SizedBox.shrink(),
-                                )
-                              ),
-                              SizedBox(
-                                child: Text('분',style: TextStyle(color: Colors.black, fontSize: 20),),
+                                underline: SizedBox.shrink(),
                               )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Flexible(
-              flex: 2,
-              child: Row(
-                children: [
-                  Flexible(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('시작 압력',style: TextStyle(color: Colors.black, fontSize: 20),),
-                        Container(
-                          margin: EdgeInsets.fromLTRB(5, 5, 0, 0),
-                          child: Row(
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(2),
-                                  color: Color(0xffEBF2FB),
-                                ),
-                                  height: 30, width: 60,
-                                child: DropdownButton(
-                                  value: startPressure,
-                                  items: _bars.map((e) => DropdownMenuItem(
-                                    value: e, // 선택 시 onChanged 를 통해 반환할 value
-                                    child: Text(e),
-                                  ))
-                                      .toList(),
-                                  onChanged: (value) { // items 의 DropdownMenuItem 의 value 반환
-                                    setState(() {
-                                      startPressure = value!;
-                                    });
-                                  },
-                                  underline: SizedBox.shrink(),
-                                )
-                              ),
-                              SizedBox(
-                                child: Text('bar',style: TextStyle(color: Colors.black, fontSize: 20),),
-                              ),
-                            ],
-                          ),
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width/80,
+                            ),
+                            Text('분',style: TextStyle(color: Colors.black, fontSize: 15),)
+                          ],
                         ),
                       ],
                     ),
@@ -231,147 +163,289 @@ class _logCreation6State extends State<logCreation6> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('종료 압력',style: TextStyle(color: Colors.black, fontSize: 20),),
-                        Container(
-                          margin: EdgeInsets.fromLTRB(5, 5, 0, 0),
-                          child: Row(
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(2),
-                                  color: Color(0xffEBF2FB),
-                                ),
-                                  height: 30, width: 60,
-                                child: DropdownButton(
-                                  value: endPressure,
-                                  items: _bars.map((e) => DropdownMenuItem(
-                                    value: e, // 선택 시 onChanged 를 통해 반환할 value
-                                    child: Text(e),
-                                  ))
-                                      .toList(),
-                                  onChanged: (value) { // items 의 DropdownMenuItem 의 value 반환
-                                    setState(() {
-                                      endPressure = value!;
-                                    });
-                                  },
-                                  underline: SizedBox.shrink(),
-                                )
-                              ),
-                              SizedBox(
-                                child: Text('bar',style: TextStyle(color: Colors.black, fontSize: 20),),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Flexible(
-              flex: 2,
-              child: Row(
-                children: [
-                  Flexible(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('평균 수심',style: TextStyle(color: Colors.black, fontSize: 20),),
-                        Container(
-                          margin: EdgeInsets.fromLTRB(5, 5, 0, 0),
-                          child: Row(
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(2),
-                                  color: Color(0xffEBF2FB),
-                                ),
-                                  height: 30, width: 60,
-                                child: DropdownButton(
-                                  value: averageDepth,
-                                  items: _depth.map((e) => DropdownMenuItem(
-                                    value: e, // 선택 시 onChanged 를 통해 반환할 value
-                                    child: Text(e),
-                                  ))
-                                      .toList(),
-                                  onChanged: (value) { // items 의 DropdownMenuItem 의 value 반환
-                                    setState(() {
-                                      averageDepth = value!;
-                                    });
-                                  },
-                                  underline: SizedBox.shrink(),
-                                )
-                              ),
-                              SizedBox(
-                                child: Text('m',style: TextStyle(color: Colors.black, fontSize: 20),),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Flexible(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('최대 수심',style: TextStyle(color: Colors.black, fontSize: 20),),
-                        Container(
-                          margin: EdgeInsets.fromLTRB(5, 5, 0, 0),
-                          child: Row(
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(2),
-                                  color: Color(0xffEBF2FB),
-                                ),
-                                  height: 30, width: 60,
-                                child: DropdownButton(
-                                  value: maxDepth,
-                                  items: _depth.map((e) => DropdownMenuItem(
-                                    value: e, // 선택 시 onChanged 를 통해 반환할 value
-                                    child: Text(e),
-                                  ))
-                                      .toList(),
-                                  onChanged: (value) { // items 의 DropdownMenuItem 의 value 반환
-                                    setState(() {
-                                      maxDepth = value!;
-                                    });
-                                  },
-                                  underline: SizedBox.shrink(),
-                                )
-                              ),
-                              SizedBox(
-                                child: Text('m',style: TextStyle(color: Colors.black, fontSize: 20),),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              height: 180,
-              child: Column(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('안전 정지',style: TextStyle(color: Colors.black, fontSize: 20),),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(5, 5, 0, 5),
-                        child: Row(
+                        Text('출수 시간', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                        Text(''),
+                        Row(
                           children: [
                             Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(2),
                                 color: Color(0xffEBF2FB),
                               ),
-                                height: 30, width: 60,
+                              padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                              height: 40, width: MediaQuery.of(context).size.width/7.5,
+                              child: DropdownButton(
+                                value: exitTimeHour,
+                                items: _hours.map((e) => DropdownMenuItem(
+                                  value: e, // 선택 시 onChanged 를 통해 반환할 value
+                                  child: Text(e),
+                                ))
+                                    .toList(),
+                                onChanged: (value) { // items 의 DropdownMenuItem 의 value 반환
+                                  setState(() {
+                                    logCreationManager.updateExitTimeHour(value!);
+                                    exitTimeHour = value;
+                                  });
+                                },
+                                style: TextStyle(
+                                  fontSize: 15, color: Colors.black,
+                                ),
+                                underline: SizedBox.shrink(),
+                              )
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width/80,
+                            ),
+                            Text('시',style: TextStyle(color: Colors.black, fontSize: 15),),
+                            SizedBox(
+                              width: 8,
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(2),
+                                color: Color(0xffEBF2FB),
+                              ),
+                              padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                              height: 40, width: MediaQuery.of(context).size.width/7.5,
+                              child: DropdownButton(
+                                value: exitTimeMin,
+                                items: _mins.map((e) => DropdownMenuItem(
+                                  value: e, // 선택 시 onChanged 를 통해 반환할 value
+                                  child: Text(e),
+                                ))
+                                    .toList(),
+                                onChanged: (value) { // items 의 DropdownMenuItem 의 value 반환
+                                  setState(() {
+                                    logCreationManager.updateExitTimeMin(value!);
+                                    exitTimeMin = value;
+                                  });
+                                },
+                                style: TextStyle(
+                                  fontSize: 15, color: Colors.black,
+                                ),
+                                underline: SizedBox.shrink(),
+                              )
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width/80,
+                            ),
+                            Text('분',style: TextStyle(color: Colors.black, fontSize: 15),)
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 25,
+              ),
+              Row(
+                children: [
+                  Flexible(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('시작 압력', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                        Text(''),
+                        Row(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(2),
+                                color: Color(0xffEBF2FB),
+                              ),
+                              padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                              height: 40, width: MediaQuery.of(context).size.width/5.5,
+                              child: DropdownButton(
+                                value: startPressure,
+                                items: _bars.map((e) => DropdownMenuItem(
+                                  value: e, // 선택 시 onChanged 를 통해 반환할 value
+                                  child: Text(e),
+                                ))
+                                    .toList(),
+                                onChanged: (value) { // items 의 DropdownMenuItem 의 value 반환
+                                  setState(() {
+                                    logCreationManager.updateStartPressure(value!);
+                                    startPressure = value;
+                                  });
+                                },
+                                style: TextStyle(
+                                  fontSize: 15, color: Colors.black,
+                                ),
+                                underline: SizedBox.shrink(),
+                              )
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width/80,
+                            ),
+                            SizedBox(
+                              child: Text('bar',style: TextStyle(color: Colors.black, fontSize: 15),),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  Flexible(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('종료 압력', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                        Text(''),
+                        Row(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(2),
+                                color: Color(0xffEBF2FB),
+                              ),
+                              padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                              height: 40, width: MediaQuery.of(context).size.width/5.5,
+                              child: DropdownButton(
+                                value: endPressure,
+                                items: _bars.map((e) => DropdownMenuItem(
+                                  value: e, // 선택 시 onChanged 를 통해 반환할 value
+                                  child: Text(e),
+                                ))
+                                    .toList(),
+                                onChanged: (value) { // items 의 DropdownMenuItem 의 value 반환
+                                  setState(() {
+                                    logCreationManager.updateEndPressure(value!);
+                                    endPressure = value;
+                                  });
+                                },
+                                style: TextStyle(
+                                  fontSize: 15, color: Colors.black,
+                                ),
+                                underline: SizedBox.shrink(),
+                              )
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width/80,
+                            ),
+                            Text('bar',style: TextStyle(color: Colors.black, fontSize: 15),),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 25,
+              ),
+              Row(
+                children: [
+                  Flexible(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('평균 수심', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                        Text(''),
+                        Row(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(2),
+                                color: Color(0xffEBF2FB),
+                              ),
+                              padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                              height: 40, width: MediaQuery.of(context).size.width/5,
+                              child: DropdownButton(
+                                value: averageDepth,
+                                items: _depth.map((e) => DropdownMenuItem(
+                                  value: e, // 선택 시 onChanged 를 통해 반환할 value
+                                  child: Text(e),
+                                ))
+                                    .toList(),
+                                onChanged: (value) { // items 의 DropdownMenuItem 의 value 반환
+                                  setState(() {
+                                    logCreationManager.updateAverageDepth(value!);
+                                    averageDepth = value;
+                                  });
+                                },
+                                style: TextStyle(
+                                  fontSize: 15, color: Colors.black,
+                                ),
+                                underline: SizedBox.shrink(),
+                              )
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width/80,
+                            ),
+                            Text('m',style: TextStyle(color: Colors.black, fontSize: 15),),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  Flexible(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('최대 수심', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                        Text(''),
+                        Row(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(2),
+                                color: Color(0xffEBF2FB),
+                              ),
+                              padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                              height: 40, width: MediaQuery.of(context).size.width/5,
+                              child: DropdownButton(
+                                value: maxDepth,
+                                items: _depth.map((e) => DropdownMenuItem(
+                                  value: e, // 선택 시 onChanged 를 통해 반환할 value
+                                  child: Text(e),
+                                ))
+                                    .toList(),
+                                onChanged: (value) { // items 의 DropdownMenuItem 의 value 반환
+                                  setState(() {
+                                    logCreationManager.updateMaxDepth(value!);
+                                    maxDepth = value;
+                                  });
+                                },
+                                style: TextStyle(
+                                  fontSize: 15, color: Colors.black,
+                                ),
+                                underline: SizedBox.shrink(),
+                              )
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width/80,
+                            ),
+                            Text('m',style: TextStyle(color: Colors.black, fontSize: 15),),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 25,
+              ),
+              SizedBox(
+                height: 230,
+                child: Column(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('안전 정지', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                        Text(''),
+                        Row(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(2),
+                                color: Color(0xffEBF2FB),
+                              ),
+                              padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                              height: 40, width: MediaQuery.of(context).size.width/6,
                               child: DropdownButton(
                                 value: safetyStop,
                                 items: _mins.map((e) => DropdownMenuItem(
@@ -381,34 +455,41 @@ class _logCreation6State extends State<logCreation6> {
                                     .toList(),
                                 onChanged: (value) { // items 의 DropdownMenuItem 의 value 반환
                                   setState(() {
-                                    safetyStop = value!;
+                                    logCreationManager.updateSafetyStop(value!);
+                                    safetyStop = value;
                                   });
                                 },
+                                style: TextStyle(
+                                  fontSize: 15, color: Colors.black,
+                                ),
                                 underline: SizedBox.shrink(),
                               )
                             ),
                             SizedBox(
-                              child: Text('min(분)',style: TextStyle(color: Colors.black, fontSize: 20),),
+                              width: MediaQuery.of(context).size.width/80,
                             ),
+                            Text('min(분)',style: TextStyle(color: Colors.black, fontSize: 15),),
                           ],
                         ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('감압정지',style: TextStyle(color: Colors.black, fontSize: 20),),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(5, 5, 0, 5),
-                        child: Row(
+                      ],
+                    ),
+                    SizedBox(
+                      height: 25,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('감압정지', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                        Text(''),
+                        Row(
                           children: [
                             Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(2),
                                 color: Color(0xffEBF2FB),
                               ),
-                                height: 30, width: 60,
+                              padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                              height: 40, width: MediaQuery.of(context).size.width/5,
                               child: DropdownButton(
                                 value: deepStopDepth1,
                                 items: _depth.map((e) => DropdownMenuItem(
@@ -418,21 +499,30 @@ class _logCreation6State extends State<logCreation6> {
                                     .toList(),
                                 onChanged: (value) { // items 의 DropdownMenuItem 의 value 반환
                                   setState(() {
-                                    deepStopDepth1 = value!;
+                                    logCreationManager.updateDeepStopDepth1(value!);
+                                    deepStopDepth1 = value;
                                   });
                                 },
+                                style: TextStyle(
+                                  fontSize: 15, color: Colors.black,
+                                ),
                                 underline: SizedBox.shrink(),
                               )
                             ),
                             SizedBox(
-                              child: Text('m',style: TextStyle(color: Colors.black, fontSize: 20),),
+                              width: MediaQuery.of(context).size.width/80,
+                            ),
+                            Text('m',style: TextStyle(color: Colors.black, fontSize: 15),),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width/80,
                             ),
                             Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(2),
                                 color: Color(0xffEBF2FB),
                               ),
-                                height: 30, width: 60,
+                              padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                              height: 40, width: MediaQuery.of(context).size.width/6,
                               child: DropdownButton(
                                 value: deepStopMin1,
                                 items: _mins.map((e) => DropdownMenuItem(
@@ -442,30 +532,36 @@ class _logCreation6State extends State<logCreation6> {
                                     .toList(),
                                 onChanged: (value) { // items 의 DropdownMenuItem 의 value 반환
                                   setState(() {
-                                    deepStopMin1 = value!;
+                                    logCreationManager.updateDeepStopMin1(value!);
+                                    deepStopMin1 = value;
                                   });
                                 },
+                                style: TextStyle(
+                                  fontSize: 15, color: Colors.black,
+                                ),
                                 underline: SizedBox.shrink(),
                               )
                             ),
                             SizedBox(
-                              child: Text('min(분)',style: TextStyle(color: Colors.black, fontSize: 20),),
+                              width: MediaQuery.of(context).size.width/80,
                             ),
+                            Text('min(분)',style: TextStyle(color: Colors.black, fontSize: 15),),
                           ],
                         ),
-                      ),
-                    ],
-                  ),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(5, 5, 0, 5),
-                    child: Row(
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
                       children: [
                         Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(2),
                             color: Color(0xffEBF2FB),
                           ),
-                            height: 30, width: 60,
+                          padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                          height: 40, width: MediaQuery.of(context).size.width/5,
                           child: DropdownButton(
                             value: deepStopDepth2,
                             items: _depth.map((e) => DropdownMenuItem(
@@ -475,21 +571,30 @@ class _logCreation6State extends State<logCreation6> {
                                 .toList(),
                             onChanged: (value) { // items 의 DropdownMenuItem 의 value 반환
                               setState(() {
-                                deepStopDepth2 = value!;
+                                logCreationManager.updateDeepStopDepth2(value!);
+                                deepStopDepth2 = value;
                               });
                             },
+                            style: TextStyle(
+                              fontSize: 15, color: Colors.black,
+                            ),
                             underline: SizedBox.shrink(),
                           )
                         ),
                         SizedBox(
-                          child: Text('m',style: TextStyle(color: Colors.black, fontSize: 20),),
+                          width: MediaQuery.of(context).size.width/80,
+                        ),
+                        Text('m',style: TextStyle(color: Colors.black, fontSize: 15),),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width/80,
                         ),
                         Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(2),
                             color: Color(0xffEBF2FB),
                           ),
-                            height: 30, width: 60,
+                          padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                          height: 40, width: MediaQuery.of(context).size.width/6,
                           child: DropdownButton(
                             value: deepStopMin2,
                             items: _mins.map((e) => DropdownMenuItem(
@@ -499,23 +604,28 @@ class _logCreation6State extends State<logCreation6> {
                                 .toList(),
                             onChanged: (value) { // items 의 DropdownMenuItem 의 value 반환
                               setState(() {
-                                deepStopMin2 = value!;
+                                logCreationManager.updateDeepStopMin2(value!);
+                                deepStopMin2 = value;
                               });
                             },
+                            style: TextStyle(
+                              fontSize: 15, color: Colors.black,
+                            ),
                             underline: SizedBox.shrink(),
                           )
                         ),
                         SizedBox(
-                          child: Text('min(분)',style: TextStyle(color: Colors.black, fontSize: 20),),
-                        )
+                          width: MediaQuery.of(context).size.width/80,
+                        ),
+                        Text('min(분)',style: TextStyle(color: Colors.black, fontSize: 15),)
                       ],
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
-        )
+            ],
+          )
+        ),
       ),
     );
   }

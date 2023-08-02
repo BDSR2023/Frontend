@@ -19,8 +19,7 @@ void main() async {
     runApp(ToHomePage());
   }
   else {
-    //runApp(const ToLoginPage());
-    runApp(ToHomePage());
+    runApp(const ToLoginPage());
   }
 }
 
@@ -33,8 +32,7 @@ class ToLoginPage extends StatelessWidget {
       theme: ThemeData(
           textTheme: TextTheme(
               bodyText2: TextStyle(
-                fontSize: 30,
-                color: Colors.white,
+                fontFamily: 'GmarketSansTTF', fontWeight: FontWeight.w500
               )
           )
       ),
@@ -52,8 +50,7 @@ class ToHomePage extends StatelessWidget {
       theme: ThemeData(
         textTheme: TextTheme(
             bodyText2: TextStyle(
-              fontSize: 30,
-              color: Colors.white,
+              fontFamily: 'GmarketSansTTF', fontWeight: FontWeight.w500
             )
         ),
       ),
