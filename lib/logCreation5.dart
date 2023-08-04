@@ -81,6 +81,7 @@ class _logCreation5State extends State<logCreation5> {
     final logCreationManager = Provider.of<LogCreationManager>(context);
 
     return  Scaffold(
+      backgroundColor: Colors.white,
       body: DefaultTextStyle(
         style: TextStyle(
             fontFamily: 'GmarketSansTTF', fontWeight: FontWeight.w500, color: Colors.black
@@ -93,10 +94,7 @@ class _logCreation5State extends State<logCreation5> {
                 SizedBox(
                   width: MediaQuery.of(context).size.width/13,
                 ),
-                Container(
-                  margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
-                  child:Text('조류', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                )
+                Text('조류', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),)
               ],
             ),
             Text(""),

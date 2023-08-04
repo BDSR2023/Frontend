@@ -51,6 +51,7 @@ class _logCreation2State extends State<logCreation2> {
     final logCreationManager = Provider.of<LogCreationManager>(context);
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: DefaultTextStyle(
         style: TextStyle(
             fontFamily: 'GmarketSansTTF', fontWeight: FontWeight.w500, color: Colors.black
@@ -58,9 +59,6 @@ class _logCreation2State extends State<logCreation2> {
         child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  height: 50,
-                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [

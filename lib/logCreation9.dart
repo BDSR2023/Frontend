@@ -8,6 +8,7 @@ class logCreation9 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,    //필요할 때를 위해 남겨둠.(키보드 쓸때, 화면 안 올라가게 하는것.)
+      backgroundColor: Colors.white,
       body: DefaultTextStyle(
         style: TextStyle(
             fontFamily: 'GmarketSansTTF', fontWeight: FontWeight.w500

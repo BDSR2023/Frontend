@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:logbook/logCreation6.dart';
 import 'package:logbook/logCreationBase.dart';
+import 'package:logbook/optionPage.dart';
 import 'profile.dart';
 
 
@@ -52,14 +53,18 @@ class _HomePageState extends State<homePage> {
                         height: 55,
                       ),
                     ),
-                    SizedBox(
-                      width: 55, height: 55,
-                      child: Icon(Icons.search, size: 50,),
-                    ),
-                    SizedBox(
-                      width: 55, height: 55,
-                      child: Icon(Icons.notifications_none_rounded, size: 50,),
-                    ),
+                    IconButton(onPressed: () {
+
+                    }, icon: Icon(Icons.search, size: 50,),
+                      padding: EdgeInsets.fromLTRB(0, 0, 30, 30),),
+                    SizedBox(width: 10,),
+                    IconButton(onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => optionPage()),
+                      );
+                    }, icon: Icon(Icons.notifications_none_rounded, size: 50,),
+                    padding: EdgeInsets.fromLTRB(0, 0, 25, 35),),
                   ],
                 ),
               ),

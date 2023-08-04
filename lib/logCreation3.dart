@@ -57,13 +57,13 @@ class _logCreation3State extends State<logCreation3> {
     final logCreationManager = Provider.of<LogCreationManager>(context);
 
     return Scaffold(
+        backgroundColor: Colors.white,
       body: DefaultTextStyle(
         style: TextStyle(
             fontFamily: 'GmarketSansTTF', fontWeight: FontWeight.w500, color: Colors.black
         ),
         child: Column(
           children: [
-            SizedBox(height: 50,),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [

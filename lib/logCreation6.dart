@@ -70,6 +70,7 @@ class _logCreation6State extends State<logCreation6> {
     final logCreationManager = Provider.of<LogCreationManager>(context);
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: DefaultTextStyle(
         style: TextStyle(
             fontFamily: 'GmarketSansTTF', fontWeight: FontWeight.w500, color: Colors.black
@@ -78,9 +79,6 @@ class _logCreation6State extends State<logCreation6> {
           padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
           child: Column(
             children: [
-              SizedBox(
-                height: 50,
-              ),
               Row(
                 children: [
                   Flexible(

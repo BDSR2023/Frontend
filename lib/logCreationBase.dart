@@ -12,6 +12,47 @@ import 'resultPage.dart';
 import 'logCreationManager.dart';
 
 
+
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final int totalPageCount;
+  final int currentPage;
+
+  CustomAppBar({required this.totalPageCount, required this.currentPage});
+
+  @override
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      backgroundColor: Colors.transparent, elevation: 0.0,
+      automaticallyImplyLeading: false,
+      leading:  IconButton(
+          onPressed: () { Navigator.pop(context); },
+          color: Color(0xffb2b2b2),
+          icon: Icon(Icons.arrow_back_ios_rounded,size: 40,)),
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: List.generate(
+          totalPageCount,
+              (index) => Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4.0),
+            child: CircleAvatar(
+              backgroundColor: index == currentPage ? Colors.black : Colors.grey,
+              radius: 5,
+            ),
+          ),
+        ),
+      ),
+      actions: [
+        SizedBox(width: 40,)
+      ],
+    );
+  }
+}
+
+
+
 class logCreationsBase extends StatefulWidget {
   const logCreationsBase({Key? key}) : super(key: key);
 
@@ -20,14 +61,25 @@ class logCreationsBase extends StatefulWidget {
 }
 
 class _logCreationsBaseState extends State<logCreationsBase> {
+  final PageController pageController = PageController();
+  int currentPage = 0;
+  int totalPageCount = 8;
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => LogCreationManager(),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
+        appBar: CustomAppBar(totalPageCount: totalPageCount, currentPage: currentPage),
         body: PageView(
+          controller: pageController,
+          onPageChanged: (index) {
+            setState(() {
+              currentPage = index;
+            });
+          },
           // 페이지들을 배열로 추가합니다.
           children: [
             logCreation1(),

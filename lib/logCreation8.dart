@@ -70,6 +70,7 @@ class _logCreation8State extends State<logCreation8> {
     final logCreationManager = Provider.of<LogCreationManager>(context);
 
     return Scaffold(
+      backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
       body: DefaultTextStyle(
         style: TextStyle(
@@ -79,9 +80,6 @@ class _logCreation8State extends State<logCreation8> {
           padding: EdgeInsets.fromLTRB(25, 0, 25, 10),
           child: Column(
             children: [
-              Container(
-                height: 50,
-              ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -237,7 +235,6 @@ class _logCreation8State extends State<logCreation8> {
                   ],
                 ),
               ),
-              SizedBox(height: 20,),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,

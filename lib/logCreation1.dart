@@ -53,6 +53,7 @@ class _logCreation1State extends State<logCreation1> {
     final logCreationManager = Provider.of<LogCreationManager>(context);
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: DefaultTextStyle(
         style: TextStyle(
             fontFamily: 'GmarketSansTTF', fontWeight: FontWeight.w500, color: Colors.black
@@ -63,7 +64,7 @@ class _logCreation1State extends State<logCreation1> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Container(
-                      margin: EdgeInsets.fromLTRB(30, 50, 5, 10),
+                      margin: EdgeInsets.fromLTRB(30, 0, 5, 10),
                       child: Text('날짜', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                     ),
                   ],
