@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:logbook/homePage.dart';
+import 'package:http/http.dart' as http;
 
 
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  LoginPage({Key? key}) : super(key: key);
+
+  var token;
 
   void _get_user_info() async {
     try {
@@ -16,6 +19,25 @@ class LoginPage extends StatelessWidget {
     } catch (error) {
       print('사용자 정보 요청 실패 $error');
     }
+  }
+
+  Future<http.Response> fetchData() async {
+    final url = Uri.parse('https://example.com/api/data'); // 실제 요청을 보낼 URL로 변경해야 합니다.
+
+    try {
+      final response = await http.get(url);
+
+      if (response.statusCode == 200) {
+        // 요청이 성공하면 response.body로 데이터를 얻을 수 있습니다.
+        print('Response data: ${response.body}');
+      } else {
+        // 요청이 실패한 경우 오류 처리
+        print('Error: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error during GET request: $e');
+    }
+    return await http.get(url);
   }
 
   @override
@@ -97,6 +119,13 @@ class LoginPage extends StatelessWidget {
 
                             //로그인 후, 홈페이지로 가기. (토큰을 받았다면)
                             //못 받았으면 돌아가기.
+
+                            /*if (await fetchData() == 200) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => signup()),
+                              );
+                            } else */ print('to homePage');
                             if (await AuthApi.instance.hasToken()) {
                               Navigator.push(
                                 context,

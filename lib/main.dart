@@ -4,6 +4,7 @@ import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'HomePage.dart';
 import 'loginPage.dart';
 import 'prac.dart';
+import 'logCreationBase.dart';
 
 
 
@@ -15,12 +16,13 @@ void main() async {
     javaScriptAppKey: '4065d5a34fc35fc6d5f85fb693b440aa',
   );
   print(await AuthApi.instance.hasToken());
+
+  //토큰유무에 따라 이동하는 페이지 다름.
   if(await AuthApi.instance.hasToken()) {
     runApp(ToHomePage());
   }
   else {
-    //runApp(const ToLoginPage());
-    runApp(ToHomePage());
+    runApp(const ToLoginPage());
   }
 }
 
@@ -33,8 +35,7 @@ class ToLoginPage extends StatelessWidget {
       theme: ThemeData(
           textTheme: TextTheme(
               bodyText2: TextStyle(
-                fontSize: 30,
-                color: Colors.white,
+                fontFamily: 'GmarketSansTTF', fontWeight: FontWeight.w500
               )
           )
       ),
@@ -52,12 +53,11 @@ class ToHomePage extends StatelessWidget {
       theme: ThemeData(
         textTheme: TextTheme(
             bodyText2: TextStyle(
-              fontSize: 30,
-              color: Colors.white,
+              fontFamily: 'GmarketSansTTF', fontWeight: FontWeight.w500
             )
         ),
       ),
-      home: homePage(),
+      home: logCreationsBase(),
     );
   }
 }

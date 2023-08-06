@@ -34,6 +34,8 @@ dependencies:
   flutter_login: ^4.1.1
   http: ^0.13.5
   image_picker: ^0.8.4+4
+  provider: ^6.0.0
+  path_provider: ^2.0.2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -62,6 +64,8 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  assets:
+    - assets/
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
@@ -98,8 +102,12 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
-fonts:
-  - family: GmarketSansTTF
-    fonts:
-      - asset: assets/fonts/GmarketSansTTFMedium.ttf
-        weight: 500
+  fonts:
+    - family: GmarketSansTTF
+      fonts:
+        - asset: assets/fonts/GmarketSansTTFBold.ttf
+          weight: 700
+        - asset: assets/fonts/GmarketSansTTFLight.ttf
+          weight: 300
+        - asset: assets/fonts/GmarketSansTTFMedium.ttf
+          weight: 500
