@@ -1,13 +1,19 @@
-class MyApp extends StatefulWidget {
+import 'package:flutter/material.dart';
+
+class FollowerScreen extends StatefulWidget {
+  final int currentPageIndex;
+
+  FollowerScreen({this.currentPageIndex = 0});
+
   @override
-  _MyAppState createState() => _MyAppState();
+  _FollowerScreenState createState() => _FollowerScreenState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _FollowerScreenState extends State<FollowerScreen> {
   late PageController _pageController;
   int _currentPageIndex = 0;
 
-  List<String> follower_names = ['김윤재', '정서현', '심승우 ', '전준', '등등 ㅎ'];
+  List<String> follower_names = ['김윤재', '정서현', '심승우', '전준', '등등 ㅎ'];
   List<String> follow_names = ['김윤지', '서명건', '이민우', '안지현', '등등ㅋ'];
 
   String searchQuery = '';
@@ -15,6 +21,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    _currentPageIndex = widget.currentPageIndex;
     _pageController = PageController(initialPage: _currentPageIndex);
   }
 
@@ -31,11 +38,16 @@ class _MyAppState extends State<MyApp> {
   }
 
   void _onNavItemTapped(int index) {
-    _pageController.animateToPage(
-      index,
-      duration: Duration(milliseconds: 300),
-      curve: Curves.easeInOut,
-    );
+    if (_currentPageIndex != index) {
+      setState(() {
+        _currentPageIndex = index;
+      });
+      _pageController.animateToPage(
+        index,
+        duration: Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    }
   }
 
   void _onSearchQueryChanged(String query) {
@@ -58,7 +70,9 @@ class _MyAppState extends State<MyApp> {
         backgroundColor: Colors.white,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
           color: Colors.black,
         ),
         title: Text(
