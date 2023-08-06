@@ -1,230 +1,363 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'logCreation9.dart';
 
-class logCreation8 extends StatelessWidget {
-  const logCreation8({Key? key}) : super(key: key);
+void main() {
+  runApp(MyApp());
+}
+
+class UserProfile {
+  String name;
+  String gender;
+  String group;
+  String tags;
+
+  UserProfile({
+    required this.name,
+    required this.gender,
+    required this.group,
+    required this.tags,
+  });
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        home: ProfileEditScreen(),
+        debugShowCheckedModeBanner: false
+    );
+  }
+}
+
+class ProfileEditScreen extends StatefulWidget {
+  @override
+  _ProfileEditScreenState createState() => _ProfileEditScreenState();
+}
+
+class _ProfileEditScreenState extends State<ProfileEditScreen> {
+  late UserProfile _userProfile;
+
+  @override
+  void initState() {
+    super.initState();
+    _userProfile = UserProfile(
+      name: '바다람사',
+      gender: '여자',
+      group: '바다사람',
+      tags: '#부산대#스쿠버#태종대',
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Color(0xffECF3FD),
-      body: Container(
-        padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        elevation: 0.0,
+        backgroundColor: Colors.white,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.grey, size: 30),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: Center(
+            child: Container(
+              padding: EdgeInsets.fromLTRB(0, 0, 50, 0),
+              child: Text(
+                '프로필 편집',
+                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
+              ),
+            )
+        ),
+      ),
+      body: SingleChildScrollView(
         child: Column(
           children: [
             Container(
-              height: 50,
-            ),
-            Flexible(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('다이빙 센터',style: TextStyle(color: Colors.black, fontSize: 20),),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(5, 5, 0, 0),
-                    child: Row(
-                      children: [
-                        Flexible(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(2),
-                              color: Color(0xffDAE8F8),
-                            ),
-                            height: 35,
-                            child: TextField(style: TextStyle(fontSize: 20),
-                              decoration: InputDecoration(
-                                hintText: '입력 해주세요',border: InputBorder.none,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+              padding: EdgeInsets.fromLTRB(
+                  MediaQuery.of(context).size.width / 1.8, 0, 0, 0),
+              child: IconButton(
+                icon: Icon(
+                  Icons.edit,
+                  color: Colors.grey,
+                  size: 20,
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => EditProfileInfoScreen(
+                        userProfile: _userProfile,
+                        onProfileUpdated: (updatedProfile) {
+                          setState(() {
+                            _userProfile = updatedProfile;
+                          });
+                        },
+                      ),
                     ),
-                  ),
-                ],
+                  );
+                },
               ),
-            ),
-            Flexible(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('버디',style: TextStyle(color: Colors.black, fontSize: 20),),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(5, 5, 0, 0),
-                    child: Row(
-                      children: [
-                        Flexible(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(2),
-                              color: Color(0xffDAE8F8),
-                            ),
-                            height: 35,
-                            child: TextField(style: TextStyle(fontSize: 20),
-                              decoration: InputDecoration(
-                                hintText: '입력 해주세요',border: InputBorder.none,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Flexible(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('가이드',style: TextStyle(color: Colors.black, fontSize: 20),),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(5, 5, 0, 0),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            Flexible(
-                              child: Container(
-                                margin: EdgeInsets.fromLTRB(0, 5, 0, 5),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(2),
-                                  color: Color(0xffDAE8F8),
-                                ),
-                                height: 30,
-                                child: TextField(
-                                  decoration: InputDecoration(border: InputBorder.none,),
-                                  style: TextStyle(fontSize: 25),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.fromLTRB(0, 5, 0, 5),
-                              height: 30, width: 100,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(2),
-                                color: Color(0xff6FA9E5),
-                              ),
-                              child: Text('강사', style: TextStyle(fontSize: 20, color: Colors.white), textAlign: TextAlign.center,
-                              ),
-                            )
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Flexible(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(2),
-                                  color: Color(0xffDAE8F8),
-                                ),
-                                height: 30,
-                                child: TextField(
-                                  decoration: InputDecoration(border: InputBorder.none,),
-                                  style: TextStyle(fontSize: 25),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              height: 30, width: 100,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(2),
-                                color: Color(0xffC9DDF6),
-                              ),
-                              child: Text('마스터', style: TextStyle(fontSize: 20, color: Colors.white,),textAlign: TextAlign.center,
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              height: 30,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            ), // 상단 여백 조정
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('서명',style: TextStyle(color: Colors.black, fontSize: 20),),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Color(0xff6FA9E5),
-                  ),
-                  height: 130,
-                ),
-                Text('스탬프',style: TextStyle(color: Colors.black, fontSize: 20),),
-                Row(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.fromLTRB(0, 0, 0, 0), margin: EdgeInsets.fromLTRB(5, 0, 10, 0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(2),
-                        color: Color(0xff6FA9E5),
-                      ),
-                      height: 40, width: 130,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xff6FA9E5)
-                        ),
-                        child: Text('CLICK!', style: TextStyle(fontSize: 20, color: Colors.white,),textAlign: TextAlign.center,),
-                          onPressed: () async {
-                            var picker = ImagePicker();
-                            var image = await picker.pickImage(source: ImageSource.gallery);
-                          }
-                      ),
-                      //Text('CLICK!', style: TextStyle(fontSize: 20, color: Colors.white,),textAlign: TextAlign.center,),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('*최근에 찍은 스탬프 사진을', style: TextStyle(fontSize: 13, color: Colors.black,)),
-                        Text('업로드 할 수 있어요.', style: TextStyle(fontSize: 13, color: Colors.black,)),
-                      ],
-                    )
-                  ],
+                CircleAvatar(
+                  backgroundImage: AssetImage('assets/윤재형.jpg'),
+                  radius: 50,
                 ),
               ],
             ),
-          ],
-        ),
-      ),
-      bottomNavigationBar: BottomAppBar(
-          color: Color(0xffECF3FD), elevation: 0.0,
-          child: Container(
-              height: 60,
+            Container(
+              padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+              child: TextButton(
+                onPressed: ()  async {
+                  var picker = ImagePicker();
+                  var image = await picker.pickImage(source: ImageSource.gallery);
+                },
+                child: Text(
+                  '사진 수정',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.black),
+                ),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.fromLTRB(
+                  MediaQuery.of(context).size.width / 9,
+                  MediaQuery.of(context).size.height / 7,
+                  0,
+                  0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                      margin: EdgeInsets.fromLTRB(20, 0, 0, 20),
-                      child: IconButton(
-                        icon: Icon(Icons.chevron_left_rounded,size: 50,),
-                        onPressed: (){Navigator.pop(context); },
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        child: Text(
+                          '사용자 이름',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(
+                            0,
+                            MediaQuery.of(context).size.width / 25,
+                            0,
+                            0),
+                        child: Text(
+                          '성별',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(
+                            0,
+                            MediaQuery.of(context).size.width / 25,
+                            0,
+                            0),
+                        child: Text(
+                          '소속 그룹',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(
+                            0,
+                            MediaQuery.of(context).size.width / 25,
+                            0,
+                            0),
+                        child: Text(
+                          '태그',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       )
+                    ],
                   ),
                   Container(
-                    margin: EdgeInsets.fromLTRB(0, 0, 40, 20),
-                    child: IconButton(
-                      icon: Icon(Icons.navigate_next_rounded, size: 50),
-                      onPressed: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => logCreation9()),
-                        );
-                      },
+                    padding: EdgeInsets.fromLTRB(
+                        MediaQuery.of(context).size.width / 8, 0, 0, 0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          child: Text(
+                            _userProfile.name,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey.withOpacity(0.8)),
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.fromLTRB(
+                              0,
+                              MediaQuery.of(context).size.width / 25,
+                              0,
+                              0),
+                          child: Text(
+                            _userProfile.gender,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey.withOpacity(0.8)),
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.fromLTRB(
+                              0,
+                              MediaQuery.of(context).size.width / 25,
+                              0,
+                              0),
+                          child: Text(
+                            _userProfile.group,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey.withOpacity(0.8)),
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.fromLTRB(
+                              0,
+                              MediaQuery.of(context).size.width / 25,
+                              0,
+                              0),
+                          child: Text(
+                            _userProfile.tags,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey.withOpacity(0.8)),
+                          ),
+                        )
+                      ],
                     ),
                   ),
                 ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class EditProfileInfoScreen extends StatefulWidget {
+  final UserProfile userProfile;
+  final Function(UserProfile) onProfileUpdated;
+
+  EditProfileInfoScreen({
+    required this.userProfile,
+    required this.onProfileUpdated,
+  });
+
+  @override
+  _EditProfileInfoScreenState createState() => _EditProfileInfoScreenState();
+}
+
+class _EditProfileInfoScreenState extends State<EditProfileInfoScreen> {
+  late TextEditingController _nameController;
+  late String _selectedGender; // 추가된 부분
+  late TextEditingController _groupController;
+  late TextEditingController _tagsController;
+
+  @override
+  void initState() {
+    super.initState();
+    _nameController = TextEditingController(text: widget.userProfile.name);
+    _selectedGender = widget.userProfile.gender; // 초기값 설정
+    _groupController = TextEditingController(text: widget.userProfile.group);
+    _tagsController = TextEditingController(text: widget.userProfile.tags);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0.0,
+          title: Center(
+              child: Container(
+                padding: EdgeInsets.fromLTRB(0, 0, 70, 0),
+                child: Text('프로필 정보 수정',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
               )
           )
       ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('사용자 이름'),
+              TextFormField(
+                controller: _nameController,
+              ),
+              Text(' '),
+              Text('성별'),
+              Row( // 버튼으로 성별 선택
+                children: [
+                  Radio<String>(
+                    value: '남자',
+                    groupValue: _selectedGender,
+                    onChanged: (value) {
+                      setState(() {
+                        _selectedGender = value!;
+                      });
+                    },
+                  ),
+                  Text('남자'),
+                  Radio<String>(
+                    value: '여자',
+                    groupValue: _selectedGender,
+                    onChanged: (value) {
+                      setState(() {
+                        _selectedGender = value!;
+                      });
+                    },
+                  ),
+                  Text('여자'),
+                ],
+              ),
+              Text(' '),
+              Text('소속 그룹'),
+              TextFormField(
+                controller: _groupController,
+              ),
+              Text(' '),
+              Text('태그'),
+              TextFormField(
+                controller: _tagsController,
+              ),
+              SizedBox(height: 16.0),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.blue, // 원하는 배경색으로 변경
+                ),
+                onPressed: () {
+                  UserProfile updatedProfile = UserProfile(
+                    name: _nameController.text,
+                    gender: _selectedGender, // 수정된 성별
+                    group: _groupController.text,
+                    tags: _tagsController.text,
+                  );
+                  widget.onProfileUpdated(updatedProfile);
+                  Navigator.pop(context);
+                },
+                child: Text('저장'),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _groupController.dispose();
+    _tagsController.dispose();
+    super.dispose();
   }
 }
