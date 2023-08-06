@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
-
 import 'HomePage.dart';
-import 'loginPage.dart';
-import 'prac.dart';
 import 'logCreationBase.dart';
 
 

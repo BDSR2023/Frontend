@@ -8,7 +8,7 @@ import 'logCreation5.dart';
 import 'logCreation6.dart';
 import 'logCreation7.dart';
 import 'logCreation8.dart';
-import 'resultPage.dart';
+// import 'resultPage.dart';
 import 'logCreationManager.dart';
 
 
