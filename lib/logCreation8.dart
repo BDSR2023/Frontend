@@ -13,6 +13,47 @@ class logCreation8 extends StatefulWidget {
 }
 
 class _logCreation8State extends State<logCreation8> {
+  TextEditingController _textFieldController = TextEditingController();
+  List<String> _selectedFollowers = [];
+
+  var follower = [
+    "김윤재",
+    "정서현",
+    "심승우",
+    "전준",
+  ];
+
+  void _onTextChanged(String text) {
+    RegExp regex = RegExp(r'(^|\s)@');
+    if (regex.hasMatch(text)) {
+      String query = text.substring(text.lastIndexOf('@') + 1).toLowerCase();
+      List<String> filteredFollowers = follower
+          .where((follower) => follower.toLowerCase().contains(query))
+          .toList();
+      setState(() {
+        _selectedFollowers = filteredFollowers;
+      });
+    } else {
+      setState(() {
+        _selectedFollowers.clear();
+      });
+    }
+  }
+
+  void _onFollowerSelected(String follower) {
+    String currentText = _textFieldController.text;
+    int atIndex = currentText.lastIndexOf("@");
+    if (atIndex >= 0) {
+      _textFieldController.text = currentText.replaceRange(atIndex, currentText.length, "@$follower ");
+      // Show the follower list again when a follower is selected after "@" is pressed
+      setState(() {
+        _selectedFollowers.clear();
+      });
+    } else {
+      _textFieldController.text = _textFieldController.text + "@$follower ";
+      _selectedFollowers.add(follower);
+    }
+  }
 
   var instructorColor = 0xffd9e7fa;
   var masterColor = 0xffd9e7fa;
@@ -40,6 +81,13 @@ class _logCreation8State extends State<logCreation8> {
     selectedGuide = '마스터';
   }
 
+
+  @override
+  void dispose() {
+    _textFieldController.dispose();
+    super.dispose();
+  }
+
   @override
   void initState() {
     super.initState();
@@ -63,6 +111,9 @@ class _logCreation8State extends State<logCreation8> {
       instructorTextColor = 0xff000000;
       masterTextColor = 0xffffffff;
     }
+    _textFieldController.addListener(() {
+      _onTextChanged(_textFieldController.text);
+    });
   }
 
   @override
@@ -77,14 +128,14 @@ class _logCreation8State extends State<logCreation8> {
             fontFamily: 'GmarketSansTTF', fontWeight: FontWeight.w500, color: Colors.black
         ),
         child: Container(
-          padding: EdgeInsets.fromLTRB(25, 0, 25, 10),
+          padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width/15, 0, MediaQuery.of(context).size.width/15, 10),
           child: Column(
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('다이빙 센터', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                  SizedBox(height: 15,),
+                  SizedBox(height: 10,),
                   Row(
                     children: [
                       Flexible(
@@ -93,7 +144,7 @@ class _logCreation8State extends State<logCreation8> {
                             borderRadius: BorderRadius.circular(5),
                             color: Color(0xffEBF2FB),
                           ),
-                          height: 40,
+                          height: 35,
                           child: TextField(style: TextStyle(
                             fontSize: 24, fontFamily: 'GmarketSansTTF',),
                             textAlign: TextAlign.center,
@@ -116,7 +167,7 @@ class _logCreation8State extends State<logCreation8> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('버디', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                  Text(''),
+                  SizedBox(height: 10,),
                   Row(
                     children: [
                       Flexible(
@@ -125,7 +176,7 @@ class _logCreation8State extends State<logCreation8> {
                             borderRadius: BorderRadius.circular(2),
                             color: Color(0xffEBF2FB),
                           ),
-                          height: 40,
+                          height: 35,
                           child: TextField(style: TextStyle(
                               fontSize: 24, fontFamily: 'GmarketSansTTF',),
                             textAlign: TextAlign.center,
@@ -143,97 +194,162 @@ class _logCreation8State extends State<logCreation8> {
                   ),
                 ],
               ),
-              SizedBox(height: 25,),
-              Flexible(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('가이드', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                    SizedBox(height: 10,),
-                    Column(
-                      children: [
-                        Row(
-                          children: [
-                            Flexible(
-                              child: Container(
-                                margin: EdgeInsets.fromLTRB(0, 0, 0, 5),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  color: Color(0xffEBF2FB),
-                                ),
-                                height: 40,
-                                child: TextField(
-                                  decoration: InputDecoration(border: InputBorder.none,),
-                                  style: TextStyle(fontSize: 24, fontFamily: 'GmarketSansTTF',),
-                                ),
-                              ),
+              SizedBox(height: 10,),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('팀원', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                  SizedBox(height: 10,),
+                  Row(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(2),
+                          color: Color(0xffEBF2FB),
+                        ),
+                        height: 35, width: MediaQuery.of(context).size.width/1.16,
+                        child: TextField(
+                          controller: _textFieldController,
+                          style: TextStyle(fontSize: 24, fontFamily: 'GmarketSansTTF',),
+                          textAlign: TextAlign.center,
+                          decoration: InputDecoration(
+                            hintText: '입력 해주세요',
+                            hintStyle: TextStyle(
+                              fontSize: 24, fontFamily: 'GmarketSansTTF',
                             ),
-                            Container(
-                              margin: EdgeInsets.fromLTRB(0, 0, 0, 5),
-                              height: 40, width: 100,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(2),
-                                color: Color(0xffd9e7fa),
-                              ),
-                              child: ElevatedButton(
-                                child: Text('강사', style: TextStyle(fontSize: 21, fontFamily: 'GmarketSansTTF',
-                                    color: Color(instructorTextColor)),
-                                  textAlign: TextAlign.center,
-                                ),
-                                onPressed: () {
-                                  toInstructor();
-                                  logCreationManager.updateSelectedGuide('강사');
-                                },
-                                style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(Color(instructorColor)),
-                                  elevation: MaterialStateProperty.all(0),
-                                ),
-                              ),
-                            )
+                            border: InputBorder.none,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+                SizedBox(height: 10,),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height/7,
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        top: 0,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text('가이드', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                           ],
                         ),
-                        Row(
-                          children: [
-                            Flexible(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(2),
-                                  color: Color(0xffEBF2FB),
-                                ),
-                                height: 40,
-                                child: TextField(
-                                  decoration: InputDecoration(border: InputBorder.none,),
-                                  style: TextStyle(fontSize: 24, fontFamily: 'GmarketSansTTF',),
-                                ),
+                      ),
+                      Positioned(
+                        top: 20,
+                        child: Container(
+                          margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: Color(0xffEBF2FB),
+                                    ),
+                                    height: 35, width: MediaQuery.of(context).size.width/1.7,
+                                    child: TextField(
+                                      decoration: InputDecoration(border: InputBorder.none,),
+                                      style: TextStyle(fontSize: 24, fontFamily: 'GmarketSansTTF',),
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                                    height: 35, width: MediaQuery.of(context).size.width/3,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(2),
+                                      color: Color(0xffd9e7fa),
+                                    ),
+                                    child: ElevatedButton(
+                                      child: Text('강사', style: TextStyle(fontSize: 21, fontFamily: 'GmarketSansTTF',
+                                          color: Color(instructorTextColor)),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      onPressed: () {
+                                        toInstructor();
+                                        logCreationManager.updateSelectedGuide('강사');
+                                      },
+                                      style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty.all(Color(instructorColor)),
+                                        elevation: MaterialStateProperty.all(0),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(2),
+                                      color: Color(0xffEBF2FB),
+                                    ),
+                                    height: 35, width: MediaQuery.of(context).size.width/1.7,
+                                    child: TextField(
+                                      decoration: InputDecoration(border: InputBorder.none,),
+                                      style: TextStyle(fontSize: 24, fontFamily: 'GmarketSansTTF',),
+                                    ),
+                                  ),
+                                  Container(
+                                    height: 35, width: MediaQuery.of(context).size.width/3,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: Color(0xffd9e7fa),
+                                    ),
+                                    child: ElevatedButton(
+                                      child: Text('마스터', style: TextStyle(fontSize: 21, fontFamily: 'GmarketSansTTF',
+                                          color: Color(masterTextColor)),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      onPressed: () {
+                                        toMaster();
+                                        logCreationManager.updateSelectedGuide('마스터');
+                                      },
+                                      style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty.all(Color(masterColor)),
+                                        elevation: MaterialStateProperty.all(0),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      if (_selectedFollowers.isNotEmpty)
+                        Positioned(
+                          top: 0,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey),
+                              borderRadius: BorderRadius.circular(5),
+                              color: Colors.white,
+                            ),
+                            width: MediaQuery.of(context).size.width/1, height: 150,
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: _selectedFollowers
+                                    .map((follower) => ListTile(
+                                  onTap: () => _onFollowerSelected(follower),
+                                  title: Text(follower),
+                                ))
+                                    .toList(),
                               ),
                             ),
-                            Container(
-                              height: 40, width: 100,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: Color(0xffd9e7fa),
-                              ),
-                              child: ElevatedButton(
-                                child: Text('마스터', style: TextStyle(fontSize: 21, fontFamily: 'GmarketSansTTF',
-                                    color: Color(masterTextColor)),
-                                  textAlign: TextAlign.center,
-                                ),
-                                onPressed: () {
-                                  toMaster();
-                                  logCreationManager.updateSelectedGuide('마스터');
-                                },
-                                style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(Color(masterColor)),
-                                  elevation: MaterialStateProperty.all(0),
-                                ),
-                              ),
-                            )
-                          ],
+                          ),
                         ),
-                      ],
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
+              Expanded(
+                  child: Container()
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

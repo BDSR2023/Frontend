@@ -16,8 +16,7 @@ class _logCreation1State extends State<logCreation1> {
   final _month= ['1','2','3','4','5','6','7','8','9','10','11','12'];
   final _day= ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17'
   ,'18','19','20','21','22','23','24','25','26','27','28','29','30','31'];
-  var weathers = ['sunny', 'cloudy', 'cloudy2', 'rainy',
-    'snow', 'lightning', 'windy', 'night'];
+  var weathers = ['sunny', 'cloudy', 'cloudy2', 'rainy', 'snow', 'lightning', 'windy', 'night'];
 
   String? selectedYear;
   String? selectedMonth;
@@ -27,6 +26,27 @@ class _logCreation1State extends State<logCreation1> {
 
   var buttonColor = [Colors.white,Colors.white,Colors.white,Colors.white,
     Colors.white,Colors.white,Colors.white,Colors.white];
+
+
+  void changeWeather(logCreationManager, k) {
+    if (selectedWeather == weathers[k]) {
+      setState(() {
+        logCreationManager.updateSelectedWeather('none');
+        selectedWeather = 'none';
+        buttonColor[k] = Colors.white;
+      });
+    } else {
+      setState(() {
+        logCreationManager.updateSelectedWeather(weathers[k]);
+        selectedWeather = weathers[k];
+        for (int i = 0; i < 8; i++) {
+          buttonColor[i] = Colors.white;
+        }
+        buttonColor[k] = Color(0xffEBF2FB);
+      });
+    }
+  }
+
 
   @override
   void initState() {
@@ -264,196 +284,91 @@ class _logCreation1State extends State<logCreation1> {
            Row(
              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
              children: [
-               ElevatedButton(onPressed: (){
-                 if (selectedWeather == 'sunny') {
-                   setState(() {
-                     logCreationManager.updateSelectedWeather('none');
-                     selectedWeather = 'none';
-                     buttonColor[0] = Colors.white;
-                   });
-                 } else {
-                   setState(() {
-                     logCreationManager.updateSelectedWeather('sunny');
-                     selectedWeather = 'sunny';
-                     for (int i = 0; i < 8; i++) {
-                       buttonColor[i] = Colors.white;
-                     }
-                     buttonColor[0] = Color(0xffEBF2FB);
-                   });
-                  }
-                 },
-                   style: ButtonStyle(
-                     backgroundColor: MaterialStateProperty.all<Color>(buttonColor[0]),
-                     elevation: MaterialStateProperty.all(0),
+               ElevatedButton(
+                   onPressed: (){
+                     changeWeather(logCreationManager, 0);
+                     },
+                   style: ElevatedButton.styleFrom(
+                     backgroundColor: buttonColor[0], elevation: 0.0,
+                       fixedSize: Size(MediaQuery.of(context).size.width/4, 70)
                    ),
-                   child:  Image.asset('sunny.png',width: MediaQuery.of(context).size.width/5.5,height: 70,
-                     fit: BoxFit.contain,)),
-               ElevatedButton(onPressed: (){
-                 if (selectedWeather == 'cloudy') {
-                   setState(() {
-                     logCreationManager.updateSelectedWeather('none');
-                     selectedWeather = 'none';
-                     buttonColor[1] = Colors.white;
-                   });
-                 } else {
-                   setState(() {
-                     logCreationManager.updateSelectedWeather('cloudy');
-                     selectedWeather = 'cloudy';
-                     for (int i = 0; i < 8; i++) {
-                       buttonColor[i] = Colors.white;
-                     }
-                     buttonColor[1] = Color(0xffEBF2FB);
-                   });
-                 }
+                   child: Image.asset('assets/sunny.png',width: MediaQuery.of(context).size.width/6, height: 70,)
+               ),
+               ElevatedButton(
+                   onPressed: (){
+                 changeWeather(logCreationManager, 1);
                },
-                   style: ButtonStyle(
-                     backgroundColor: MaterialStateProperty.all<Color>(buttonColor[1]),
-                     elevation: MaterialStateProperty.all(0),
+                   style: ElevatedButton.styleFrom(
+                     backgroundColor: buttonColor[1], elevation: 0.0,
+                       fixedSize: Size(MediaQuery.of(context).size.width/4, 70)
                    ),
-                   child:  Image.asset('cloudy.png',width: MediaQuery.of(context).size.width/5.5,height: 70,)),
-               ElevatedButton(onPressed: (){
-                 if (selectedWeather == 'cloudy2') {
-                   setState(() {
-                     logCreationManager.updateSelectedWeather('none');
-                     selectedWeather = 'none';
-                     buttonColor[2] = Colors.white;
-                   });
-                 } else {
-                   setState(() {
-                     logCreationManager.updateSelectedWeather('cloudy2');
-                     selectedWeather = 'cloudy2';
-                     for (int i = 0; i < 8; i++) {
-                       buttonColor[i] = Colors.white;
-                     }
-                     buttonColor[2] = Color(0xffEBF2FB);
-                   });
-                 }
+                   child:  Image.asset('assets/cloudy.png',width: MediaQuery.of(context).size.width/6, height: 70,)
+               ),
+               ElevatedButton(
+                   onPressed: (){
+                 changeWeather(logCreationManager, 2);
                },
-                   style: ButtonStyle(
-                     backgroundColor: MaterialStateProperty.all<Color>(buttonColor[2]),
-                     elevation: MaterialStateProperty.all(0),
+                   style: ElevatedButton.styleFrom(
+                     backgroundColor: buttonColor[2], elevation: 0.0,
+                       fixedSize: Size(MediaQuery.of(context).size.width/4, 70)
                    ),
-                   child:  Image.asset('cloudy2.png',width: MediaQuery.of(context).size.width/5.5,height: 70,)),
-               ElevatedButton(onPressed: (){
-                 if (selectedWeather == 'rainy') {
-                   setState(() {
-                     logCreationManager.updateSelectedWeather('none');
-                     selectedWeather = 'none';
-                     buttonColor[3] = Colors.white;
-                   });
-                 } else {
-                   setState(() {
-                     logCreationManager.updateSelectedWeather('rainy');
-                     selectedWeather = 'rainy';
-                     for (int i = 0; i < 8; i++) {
-                       buttonColor[i] = Colors.white;
-                     }
-                     buttonColor[3] = Color(0xffEBF2FB);
-                   });
-                 }
+                   child:  Image.asset('assets/cloudy2.png',width: MediaQuery.of(context).size.width/6,height: 70,)
+               ),
+               ElevatedButton(
+                   onPressed: (){
+                 changeWeather(logCreationManager, 3);
                },
-                   style: ButtonStyle(
-                     backgroundColor: MaterialStateProperty.all<Color>(buttonColor[3]),
-                     elevation: MaterialStateProperty.all(0),
+                   style: ElevatedButton.styleFrom(
+                     backgroundColor: buttonColor[3], elevation: 0.0,
+                       fixedSize: Size(MediaQuery.of(context).size.width/4, 70)
                    ),
-                   child:  Image.asset('rainy.png',width: MediaQuery.of(context).size.width/5.5,height: 70,)),
+                   child:  Image.asset('assets/rainy.png',width: MediaQuery.of(context).size.width/6,height: 70,)
+               ),
              ],
            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                ElevatedButton(onPressed: (){
-                  if (selectedWeather == 'snow') {
-                    setState(() {
-                      logCreationManager.updateSelectedWeather('none');
-                      selectedWeather = 'none';
-                      buttonColor[4] = Colors.white;
-                    });
-                  } else {
-                    setState(() {
-                      logCreationManager.updateSelectedWeather('snow');
-                      selectedWeather = 'snow';
-                      for (int i = 0; i < 8; i++) {
-                        buttonColor[i] = Colors.white;
-                      }
-                      buttonColor[4] = Color(0xffEBF2FB);
-                    });
-                  }
+                ElevatedButton(
+                    onPressed: (){
+                  changeWeather(logCreationManager, 4);
                 },
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(buttonColor[4]),
-                      elevation: MaterialStateProperty.all(0),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: buttonColor[4], elevation: 0.0,
+                        fixedSize: Size(MediaQuery.of(context).size.width/4, 70)
                     ),
-                    child:  Image.asset('snow.png',width: MediaQuery.of(context).size.width/5.5,height: 70)),
-                ElevatedButton(onPressed: (){
-                  if (selectedWeather == 'lightning') {
-                    setState(() {
-                      logCreationManager.updateSelectedWeather('none');
-                      selectedWeather = 'none';
-                      buttonColor[5] = Colors.white;
-                    });
-                  } else {
-                    setState(() {
-                      logCreationManager.updateSelectedWeather('lightning');
-                      selectedWeather = 'lightning';
-                      for (int i = 0; i < 8; i++) {
-                        buttonColor[i] = Colors.white;
-                      }
-                      buttonColor[5] = Color(0xffEBF2FB);
-                    });
-                  }
+                    child:  Image.asset('assets/snow.png',width: MediaQuery.of(context).size.width/6,height: 70)
+                ),
+                ElevatedButton(
+                    onPressed: (){
+                  changeWeather(logCreationManager, 5);
                 },
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(buttonColor[5]),
-                      elevation: MaterialStateProperty.all(0),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: buttonColor[5], elevation: 0.0,
+                        fixedSize: Size(MediaQuery.of(context).size.width/4, 70)
                     ),
-                    child:  Image.asset('lightning.png',width: MediaQuery.of(context).size.width/5.5,height: 70,)),
-                ElevatedButton(onPressed: (){
-                  if (selectedWeather == 'windy') {
-                    setState(() {
-                      logCreationManager.updateSelectedWeather('none');
-                      selectedWeather = 'none';
-                      buttonColor[6] = Colors.white;
-                    });
-                  } else {
-                    setState(() {
-                      logCreationManager.updateSelectedWeather('windy');
-                      selectedWeather = 'windy';
-                      for (int i = 0; i < 8; i++) {
-                        buttonColor[i] = Colors.white;
-                      }
-                      buttonColor[6] = Color(0xffEBF2FB);
-                    });
-                  }
+                    child:  Image.asset('assets/lightning.png',width: MediaQuery.of(context).size.width/6,height: 70,)
+                ),
+                ElevatedButton(
+                    onPressed: (){
+                  changeWeather(logCreationManager, 6);
                 },
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(buttonColor[6]),
-                      elevation: MaterialStateProperty.all(0),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: buttonColor[6], elevation: 0.0,
+                        fixedSize: Size(MediaQuery.of(context).size.width/4, 70)
                     ),
-                    child:  Image.asset('windy.png',width: MediaQuery.of(context).size.width/5.5,height: 70,)),
-                ElevatedButton(onPressed: (){
-                  if (selectedWeather == 'night') {
-                    setState(() {
-                      logCreationManager.updateSelectedWeather('none');
-                      selectedWeather = 'none';
-                      buttonColor[7] = Colors.white;
-                    });
-                  } else {
-                    setState(() {
-                      logCreationManager.updateSelectedWeather('night');
-                      selectedWeather = 'night';
-                      for (int i = 0; i < 8; i++) {
-                        buttonColor[i] = Colors.white;
-                      }
-                      buttonColor[7] = Color(0xffEBF2FB);
-                    });
-                  }
+                    child:  Image.asset('assets/windy.png',width: MediaQuery.of(context).size.width/6,height: 70,)
+                ),
+                ElevatedButton(
+                    onPressed: (){
+                  changeWeather(logCreationManager, 7);
                 },
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(buttonColor[7]),
-                      elevation: MaterialStateProperty.all(0),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: buttonColor[7], elevation: 0.0,
+                      fixedSize: Size(MediaQuery.of(context).size.width/4, 70)
                     ),
-                    child:  Image.asset('night.png',width: MediaQuery.of(context).size.width/5.5,height: 70,)),
+                    child:  Image.asset('assets/night.png',)
+                ),
               ],
             ),
             Flexible(child: Container(), flex: 4,),

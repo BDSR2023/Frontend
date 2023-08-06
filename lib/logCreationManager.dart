@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-// logCreationBase Provider 클래스
+//logCreationsBase 변수는 여기 저장해서 쓰시면 됩니다.
+
+// logCreationsBase Provider 클래스
 class LogCreationManager extends ChangeNotifier {
 
   //logCreation1
@@ -243,5 +245,8 @@ class LogCreationManager extends ChangeNotifier {
     _selectedGuide = newSelectedGuide;
     notifyListeners();
   }
+
+  //logCreation8
+
 
 }

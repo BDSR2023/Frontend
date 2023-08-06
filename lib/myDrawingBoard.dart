@@ -1,9 +1,38 @@
 import 'package:flutter/material.dart';
-import 'myCostomPainter.dart';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
+
+class MyCustomPainter extends CustomPainter {
+  List<Offset> points = [];
+
+  MyCustomPainter({required this.points});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    if (points.isEmpty) return; //잘 모르겠음.
+
+    Paint paint = Paint()
+      ..color = Colors.black
+      ..strokeCap = StrokeCap.round
+      ..strokeWidth = 5.0;
+
+    for (int i = 0; i < points.length - 1; i++) {
+      if (points[i] != null && points[i + 1] != null) {
+        canvas.drawLine(points[i], points[i + 1], paint);
+      }
+    }
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return true;
+  }
+}
 
 
+//위의 MyCustomPainter를 가져옵니다.
 class MyDrawingBoard extends StatefulWidget {
   @override
   _MyDrawingBoardState createState() => _MyDrawingBoardState();
@@ -23,14 +52,18 @@ class _MyDrawingBoardState extends State<MyDrawingBoard> {
 
     final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
     if (byteData != null) {
-      // 파일로 저장하거나, 클립보드에 복사하는 등의 작업을 할 수 있습니다.
-      // 여기서는 파일로 저장하는 예제를 보여드리겠습니다.
-      // 파일로 저장하는 로직은 path_provider 패키지를 사용하여 앱 디렉토리에 파일을 저장하는 방식을 사용합니다.
-      // 필요한 경우 path_provider 패키지를 추가하여 아래의 파일 저장 로직을 구현해야 합니다.
-      // final buffer = byteData.buffer.asUint8List();
-      // final directory = await getApplicationDocumentsDirectory();
-      // final file = File('${directory.path}/my_image.png');
-      // await file.writeAsBytes(buffer);
+      final buffer = byteData.buffer.asUint8List();
+      // path_provider 패키지를 사용하여 저장 경로를 얻습니다.
+      final directory = await getApplicationDocumentsDirectory();
+      // 파일명을 지정합니다. 현재 시간을 이용하여 고유한 파일명을 생성하는 것이 좋습니다.
+      final fileName = '${DateTime.now().millisecondsSinceEpoch}.png';
+      // 파일 경로를 만듭니다.
+      final filePath = '${directory.path}/$fileName';
+      // 파일로 저장합니다.
+      await File(filePath).writeAsBytes(buffer);
+      print('\n저장 완료\n');
+      // 파일 저장 경로입니다.
+      print('\n${directory.path}\n');
     }
   }
 

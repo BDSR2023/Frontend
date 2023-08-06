@@ -4,6 +4,7 @@ import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'HomePage.dart';
 import 'loginPage.dart';
 import 'prac.dart';
+import 'logCreationBase.dart';
 
 
 
@@ -15,6 +16,8 @@ void main() async {
     javaScriptAppKey: '4065d5a34fc35fc6d5f85fb693b440aa',
   );
   print(await AuthApi.instance.hasToken());
+
+  //토큰유무에 따라 이동하는 페이지 다름.
   if(await AuthApi.instance.hasToken()) {
     runApp(ToHomePage());
   }
@@ -54,7 +57,7 @@ class ToHomePage extends StatelessWidget {
             )
         ),
       ),
-      home: homePage(),
+      home: logCreationsBase(),
     );
   }
 }

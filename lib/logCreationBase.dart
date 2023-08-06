@@ -13,6 +13,12 @@ import 'logCreationManager.dart';
 
 
 
+//여기서의 변수들은 logCreationManager.dart에 저장됩니다.
+//provider사용법을 참고해주세요.
+
+
+
+//위의 동그랑미 이동 위젯.
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final int totalPageCount;
   final int currentPage;
