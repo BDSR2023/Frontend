@@ -15,9 +15,9 @@ class HalfCirclePainter extends CustomPainter {
       ..color = Colors.lightBlueAccent // 반원의 색상 설정
       ..style = PaintingStyle.fill; // 반원을 채울 스타일로 설정
 
-    final center = Offset(size.width / 2, size.height / 2);
-    final radius = MediaQuery.of(context).size.height / 2;
-    canvas.drawArc(Rect.fromCircle(center: center, radius: radius), 0, -3.14, true, paint);
+    final center = Offset(size.width / 2, size.height / 2); // 중심점 설정
+    final radius = MediaQuery.of(context).size.height / 2; // 반지름 설정
+    canvas.drawArc(Rect.fromCircle(center: center, radius: radius), 0, -3.14, true, paint); // 반원 그리기
 
     // 텍스트 그리기
     final textStyle = TextStyle(
@@ -76,6 +76,7 @@ class HalfCircleWidget extends StatelessWidget {
 }
 
 class MyApp extends StatelessWidget {
+  // 날짜 로그 목록
   final List<String> log_date = [
     '2020.08.13     제주도문섬',
     '2020.08.15     제주도범섬',
@@ -116,7 +117,7 @@ class MyApp extends StatelessWidget {
                 },
               ),
             ),
-            // Wrap HalfCircleWidget with Builder widget to get a new BuildContext
+            // HalfCircleWidget을 Column의 맨 아래에 배치
             Builder(
               builder: (context) => Container(
                 height: MediaQuery.of(context).size.height / 2,
