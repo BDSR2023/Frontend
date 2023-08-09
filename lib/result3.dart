@@ -19,6 +19,7 @@ class result3 extends StatefulWidget {
 }
 
 class _result3State extends State<result3> {
+  // 페이지 컨트롤러 선언
   late PageController _pageController;
   int _currentPage = 0;
   List<String> _contentList = [
@@ -31,11 +32,13 @@ class _result3State extends State<result3> {
   @override
   void initState() {
     super.initState();
+    // 페이지 컨트롤러 초기화
     _pageController = PageController();
   }
 
   @override
   void dispose() {
+    // 페이지 컨트롤러 해제
     _pageController.dispose();
     super.dispose();
   }
@@ -44,11 +47,12 @@ class _result3State extends State<result3> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView.builder(
-        itemCount: 19,
+        itemCount: 19, // 아이템 수
         itemBuilder: (context, index) {
-          IconData iconData = Icons.circle;
-          String text = '';
+          IconData iconData = Icons.circle; // 아이콘 기본값
+          String text = ''; // 텍스트 기본값
 
+          // 각 아이템에 따라 아이콘과 텍스트 지정
           switch (index) {
             case 0:
               text = 'n번째 로그북';
@@ -131,9 +135,10 @@ class _result3State extends State<result3> {
               break;
           }
 
+          // 각 아이템을 ListTile로 표시
           return ListTile(
-            leading: Icon(iconData),
-            title: Text(text),
+            leading: Icon(iconData), // 왼쪽에 아이콘 표시
+            title: Text(text), // 아이템 텍스트 표시
           );
         },
       ),
