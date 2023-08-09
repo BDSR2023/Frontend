@@ -5,6 +5,7 @@ void main() {
   runApp(MyApp());
 }
 
+// 사용자 프로필 정보를 저장하는 클래스
 class UserProfile {
   String name;
   String gender;
@@ -23,8 +24,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: profile_edit(),
-        debugShowCheckedModeBanner: false
+      home: profile_edit(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -40,6 +41,7 @@ class _profile_editState extends State<profile_edit> {
   @override
   void initState() {
     super.initState();
+    // 초기 사용자 프로필 생성
     _userProfile = UserProfile(
       name: '바다람사',
       gender: '여자',
@@ -58,22 +60,24 @@ class _profile_editState extends State<profile_edit> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.grey, size: 30),
           onPressed: () {
+            // 뒤로 가기 버튼을 누를 때 동작
             Navigator.pop(context);
           },
         ),
         title: Center(
-            child: Container(
-              padding: EdgeInsets.fromLTRB(0, 0, 50, 0),
-              child: Text(
-                '프로필 편집',
-                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
-              ),
-            )
+          child: Container(
+            padding: EdgeInsets.fromLTRB(0, 0, 50, 0),
+            child: Text(
+              '프로필 편집',
+              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
+            ),
+          ),
         ),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
+            // "프로필 수정" 아이콘 버튼
             Container(
               padding: EdgeInsets.fromLTRB(
                   MediaQuery.of(context).size.width / 1.8, 0, 0, 0),
@@ -84,11 +88,13 @@ class _profile_editState extends State<profile_edit> {
                   size: 20,
                 ),
                 onPressed: () {
+                  // 프로필 수정 화면으로 이동
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => EditProfileInfoScreen(
                         userProfile: _userProfile,
+                        // 수정된 프로필을 받아 업데이트
                         onProfileUpdated: (updatedProfile) {
                           setState(() {
                             _userProfile = updatedProfile;
@@ -103,6 +109,7 @@ class _profile_editState extends State<profile_edit> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                // 사용자 프로필 이미지
                 CircleAvatar(
                   backgroundImage: AssetImage('assets/윤재형.jpg'),
                   radius: 50,
@@ -112,7 +119,8 @@ class _profile_editState extends State<profile_edit> {
             Container(
               padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
               child: TextButton(
-                onPressed: ()  async {
+                onPressed: () async {
+                  // 갤러리에서 사진 선택
                   var picker = ImagePicker();
                   var image = await picker.pickImage(source: ImageSource.gallery);
                 },
@@ -242,12 +250,12 @@ class _profile_editState extends State<profile_edit> {
 }
 
 class EditProfileInfoScreen extends StatefulWidget {
-  final UserProfile userProfile;
-  final Function(UserProfile) onProfileUpdated;
+  final UserProfile userProfile; // 수정 전 사용자 프로필 정보
+  final Function(UserProfile) onProfileUpdated; // 프로필 업데이트 콜백 함수
 
   EditProfileInfoScreen({
-    required this.userProfile,
-    required this.onProfileUpdated,
+    required this.userProfile, // 생성자로 사용자 프로필 정보 받음
+    required this.onProfileUpdated, // 업데이트 콜백 함수 받음
   });
 
   @override
@@ -255,14 +263,15 @@ class EditProfileInfoScreen extends StatefulWidget {
 }
 
 class _EditProfileInfoScreenState extends State<EditProfileInfoScreen> {
-  late TextEditingController _nameController;
-  late String _selectedGender; // 추가된 부분
-  late TextEditingController _groupController;
-  late TextEditingController _tagsController;
+  late TextEditingController _nameController; // 이름 입력 컨트롤러
+  late String _selectedGender; // 선택된 성별
+  late TextEditingController _groupController; // 그룹 입력 컨트롤러
+  late TextEditingController _tagsController; // 태그 입력 컨트롤러
 
   @override
   void initState() {
     super.initState();
+    // 수정 전 프로필 정보를 컨트롤러와 변수에 할당
     _nameController = TextEditingController(text: widget.userProfile.name);
     _selectedGender = widget.userProfile.gender; // 초기값 설정
     _groupController = TextEditingController(text: widget.userProfile.group);
@@ -289,13 +298,15 @@ class _EditProfileInfoScreenState extends State<EditProfileInfoScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // "사용자 이름" 입력란
               Text('사용자 이름'),
               TextFormField(
                 controller: _nameController,
               ),
               Text(' '),
+              // "성별" 선택 라디오 버튼
               Text('성별'),
-              Row( // 버튼으로 성별 선택
+              Row(
                 children: [
                   Radio<String>(
                     value: '남자',
@@ -320,29 +331,33 @@ class _EditProfileInfoScreenState extends State<EditProfileInfoScreen> {
                 ],
               ),
               Text(' '),
+              // "소속 그룹" 입력란
               Text('소속 그룹'),
               TextFormField(
                 controller: _groupController,
               ),
               Text(' '),
+              // "태그" 입력란
               Text('태그'),
               TextFormField(
                 controller: _tagsController,
               ),
               SizedBox(height: 16.0),
+              // "저장" 버튼
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   primary: Colors.blue, // 원하는 배경색으로 변경
                 ),
                 onPressed: () {
+                  // 수정된 프로필 정보로 업데이트 후 화면 닫기
                   UserProfile updatedProfile = UserProfile(
                     name: _nameController.text,
                     gender: _selectedGender, // 수정된 성별
                     group: _groupController.text,
                     tags: _tagsController.text,
                   );
-                  widget.onProfileUpdated(updatedProfile);
-                  Navigator.pop(context);
+                  widget.onProfileUpdated(updatedProfile); // 업데이트 콜백 호출
+                  Navigator.pop(context); // 화면 닫기
                 },
                 child: Text('저장'),
               ),
@@ -355,6 +370,7 @@ class _EditProfileInfoScreenState extends State<EditProfileInfoScreen> {
 
   @override
   void dispose() {
+    // 컨트롤러들 해제
     _nameController.dispose();
     _groupController.dispose();
     _tagsController.dispose();
