@@ -13,28 +13,28 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  List<String> tags = [];
+  List<String> tags = [];  // 사용자가 입력한 태그를 저장하는 리스트
 
-  TextEditingController tagController = TextEditingController();
+  TextEditingController tagController = TextEditingController();  // 태그 입력을 받는 컨트롤러
 
   void addTag(String tag) {
     if (tag.trim().isNotEmpty) {
       setState(() {
-        tags.add(tag);
+        tags.add(tag);  // 입력한 태그를 리스트에 추가
       });
-      tagController.clear();
+      tagController.clear();  // 태그 입력 필드를 지움
     }
   }
 
   void removeTag(String tag) {
     setState(() {
-      tags.remove(tag);
+      tags.remove(tag);  // 선택한 태그를 리스트에서 제거
     });
   }
 
   @override
   void dispose() {
-    tagController.dispose();
+    tagController.dispose();  // 컨트롤러 해제
     super.dispose();
   }
 
@@ -43,6 +43,7 @@ class _MyAppState extends State<MyApp> {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
+          // 첫 번째 Sliver - 상단 문구
           SliverToBoxAdapter(
             child: Container(
               margin: EdgeInsets.fromLTRB(30, 70, 0, 10),
@@ -65,20 +66,13 @@ class _MyAppState extends State<MyApp> {
               ),
             ),
           ),
+          // 두 번째 Sliver - 닉네임 입력과 중복확인
           SliverToBoxAdapter(
             child: Container(
               height: MediaQuery.of(context).size.height,
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20, 10, 20, 0),
-                        child: Text('닉네임'),
-                      ),
-                    ],
-                  ),
+                  // 세 번째 Sliver - 닉네임 입력
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -112,6 +106,7 @@ class _MyAppState extends State<MyApp> {
                       )
                     ],
                   ),
+                  // 네 번째 Sliver - 이전 로그 수 입력
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -132,6 +127,7 @@ class _MyAppState extends State<MyApp> {
                       ),
                     ),
                   ),
+                  // 다섯 번째 Sliver - 태그 입력
                   Container(
                     height: 60,
                     child: Row(
@@ -162,6 +158,7 @@ class _MyAppState extends State<MyApp> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
+                      // 여섯 번째 Sliver - 태그 입력 필드
                       Expanded(
                         child: Container(
                           margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
@@ -195,6 +192,7 @@ class _MyAppState extends State<MyApp> {
                       )
                     ],
                   ),
+                  // 일곱 번째 Sliver - 태그 사용 예시 설명
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
