@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
+// FollowerScreen 클래스 정의
 class FollowerScreen extends StatefulWidget {
   final int currentPageIndex;
 
+  // 생성자 함수
   FollowerScreen({this.currentPageIndex = 0});
 
   @override
@@ -10,9 +12,11 @@ class FollowerScreen extends StatefulWidget {
 }
 
 class _FollowerScreenState extends State<FollowerScreen> {
+  // PageController와 현재 페이지 인덱스 변수 선언
   late PageController _pageController;
   int _currentPageIndex = 0;
 
+  // 팔로워와 팔로잉 목록 데이터
   List<String> follower_names = ['김윤재', '정서현', '심승우', '전준', '등등 ㅎ'];
   List<String> follow_names = ['김윤지', '서명건', '이민우', '안지현', '등등ㅋ'];
 
@@ -21,22 +25,27 @@ class _FollowerScreenState extends State<FollowerScreen> {
   @override
   void initState() {
     super.initState();
+    // 현재 페이지 인덱스 초기화
     _currentPageIndex = widget.currentPageIndex;
+    // PageController 초기화
     _pageController = PageController(initialPage: _currentPageIndex);
   }
 
   @override
   void dispose() {
+    // PageController 해제
     _pageController.dispose();
     super.dispose();
   }
 
+  // 페이지 변경 시 호출되는 함수
   void _onPageChanged(int index) {
     setState(() {
       _currentPageIndex = index;
     });
   }
 
+  // 네비게이션 바 아이템 선택 시 호출되는 함수
   void _onNavItemTapped(int index) {
     if (_currentPageIndex != index) {
       setState(() {
@@ -50,12 +59,14 @@ class _FollowerScreenState extends State<FollowerScreen> {
     }
   }
 
+  // 검색 쿼리 변경 시 호출되는 함수
   void _onSearchQueryChanged(String query) {
     setState(() {
       searchQuery = query;
     });
   }
 
+  // 검색된 이름 리스트 반환 함수
   List<String> getFilteredNames(List<String> names) {
     return names
         .where((name) => name.toLowerCase().contains(searchQuery.toLowerCase()))
@@ -71,6 +82,7 @@ class _FollowerScreenState extends State<FollowerScreen> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
+            // 뒤로가기 버튼 클릭 시 현재 화면 종료
             Navigator.pop(context);
           },
           color: Colors.black,
@@ -112,15 +124,17 @@ class _FollowerScreenState extends State<FollowerScreen> {
         controller: _pageController,
         onPageChanged: _onPageChanged,
         children: [
+          // 팔로워 목록 페이지
           Container(
             color: Colors.white,
             child: Center(
               child: Column(
                 children: [
+                  // 검색 필드
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Container(
-                      height: 30.0, // TextField의 높이를 조정
+                      height: 30.0,
                       child: TextField(
                         onChanged: _onSearchQueryChanged,
                         decoration: InputDecoration(
@@ -134,6 +148,7 @@ class _FollowerScreenState extends State<FollowerScreen> {
                       ),
                     ),
                   ),
+                  // 검색 결과를 나타내는 리스트뷰
                   Expanded(
                     child: ListView.builder(
                       itemCount: getFilteredNames(follower_names).length,
@@ -151,7 +166,9 @@ class _FollowerScreenState extends State<FollowerScreen> {
                             style: ElevatedButton.styleFrom(
                               primary: Colors.grey,
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              // 팔로워 삭제 버튼 클릭 시 동작
+                            },
                             child: Text('삭제', style: TextStyle(color: Colors.black)),
                           ),
                         );
@@ -162,15 +179,17 @@ class _FollowerScreenState extends State<FollowerScreen> {
               ),
             ),
           ),
+          // 팔로잉 목록 페이지
           Container(
             color: Colors.white,
             child: Center(
               child: Column(
                 children: [
+                  // 검색 필드
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Container(
-                      height: 30.0, // TextField의 높이를 조정
+                      height: 30.0,
                       child: TextField(
                         onChanged: _onSearchQueryChanged,
                         decoration: InputDecoration(
@@ -184,6 +203,7 @@ class _FollowerScreenState extends State<FollowerScreen> {
                       ),
                     ),
                   ),
+                  // 검색 결과를 나타내는 리스트뷰
                   Expanded(
                     child: ListView.builder(
                       itemCount: getFilteredNames(follow_names).length,
@@ -200,7 +220,9 @@ class _FollowerScreenState extends State<FollowerScreen> {
                             style: ElevatedButton.styleFrom(
                               primary: Colors.white,
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              // 팔로잉 버튼 클릭 시 동작
+                            },
                             child: Text('팔로잉', style: TextStyle(color: Colors.black)),
                           ),
                         );
