@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
-import 'result2.dart';
+import 'result2.dart'; // 이 코드에서 필요한 result2.dart 등의 파일을 import
 import 'result3.dart';
 import 'result4.dart';
 import 'result5.dart';
@@ -36,7 +36,7 @@ class _result_frameState extends State<result_frame> {
     result3(),
     result4(),
     result5()
-  ];
+  ]; // 여러 result 페이지들을 리스트로 저장
 
   @override
   void initState() {
