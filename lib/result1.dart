@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'result_frame.dart';
+import 'result_frame.dart'; // 다른 파일에서 가져온 모듈
 
 void main() {
   runApp(MyApp());
@@ -22,8 +22,10 @@ class Result1 extends StatefulWidget {
 }
 
 class _Result1State extends State<Result1> {
+  // 선택된 로그 날짜 텍스트
   String _selectedlog_date = '로그 기록을 찾아보세요';
 
+  // 로그 날짜 리스트
   List<String> log_date = [
     "로그 기록을 찾아보세요",
     "2022.08.15 / 제주도 보트다이빙",
@@ -31,6 +33,7 @@ class _Result1State extends State<Result1> {
     "2023.06.14 / 시밀란 리브어보드",
   ];
 
+  // 로그 아이템에 대한 컬러 리스트
   List<Color> containerColors = [
     Colors.blue,
     Colors.green,
@@ -44,6 +47,7 @@ class _Result1State extends State<Result1> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // 상단 타이틀과 로그 추가 버튼
           Row(
             children: [
               Column(
@@ -73,6 +77,7 @@ class _Result1State extends State<Result1> {
               )
             ],
           ),
+          // 로그 날짜 선택을 위한 드롭다운 버튼
           Container(
             padding: EdgeInsets.fromLTRB(40, 20, 40, 0),
             width: MediaQuery.of(context).size.width,
@@ -84,7 +89,7 @@ class _Result1State extends State<Result1> {
                   child: Text(item),
                 );
               }).toList(),
-              onChanged: (String? value,) {
+              onChanged: (String? value) {
                 setState(() {
                   _selectedlog_date = value!;
                   if (_selectedlog_date != log_date[0]) {
@@ -95,13 +100,16 @@ class _Result1State extends State<Result1> {
               },
             ),
           ),
+          // 로그 아이템 카드들
           Container(
             padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
+                // 첫 번째 로그 아이템
                 InkWell(
                   onTap: () {
+                    // 첫 번째 로그 아이템 클릭 시 수행할 동작
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -155,9 +163,10 @@ class _Result1State extends State<Result1> {
                     ),
                   ),
                 ),
+                // 두 번째 로그 아이템
                 InkWell(
                   onTap: () {
-                    // 버튼 2가 클릭되었을 때 수행할 동작
+                    // 두 번째 로그 아이템 클릭 시 수행할 동작
                     print('Button 2 Clicked!');
                   },
                   child: Container(
@@ -206,9 +215,10 @@ class _Result1State extends State<Result1> {
                     ),
                   ),
                 ),
+                // 세 번째 로그 아이템
                 InkWell(
                   onTap: () {
-                    // 버튼 3이 클릭되었을 때 수행할 동작
+                    // 세 번째 로그 아이템 클릭 시 수행할 동작
                     print('Button 3 Clicked!');
                   },
                   child: Container(
@@ -261,19 +271,22 @@ class _Result1State extends State<Result1> {
             ),
           ),
           Text(''),
+          // "지나간 로그북 기록" 타이틀
           Center(
             child: Text(
               '지나간 로그북 기록',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
           ),
+          // 로그 날짜 리스트 표시
           Expanded(
             child: ListView.builder(
               itemCount: log_date.length,
               itemBuilder: (context, index) {
-                if (index == 0) return Container();
+                if (index == 0) return Container(); // 첫 번째 아이템은 빈 컨테이너
                 return InkWell(
                   onTap: () {
+                    // 특정 로그 아이템 클릭 시 수행할 동작
                     if (log_date[index].contains("제주도")) {
                       _selectedlog_date = log_date[index];
                       _onDropdownChanged(log_date[index]);
@@ -303,7 +316,7 @@ class _Result1State extends State<Result1> {
                     leading: Container(
                       width: MediaQuery.of(context).size.width / 30,
                       height: MediaQuery.of(context).size.height / 4,
-                      color: containerColors[index - 1],
+                      color: containerColors[index - 1], // 컨테이너 색상
                     ),
                     title: Text("${index + 80}TH", style: TextStyle(fontWeight: FontWeight.bold)),
                   ),
@@ -316,6 +329,7 @@ class _Result1State extends State<Result1> {
     );
   }
 
+  // 드롭다운 변경 시 호출되는 함수
   void _onDropdownChanged(String value) {
     setState(() {
       _selectedlog_date = value;
