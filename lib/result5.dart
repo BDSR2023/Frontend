@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+
 void main() {
   runApp(MyApp());
 }
-
 
 class MyApp extends StatelessWidget {
   @override
@@ -19,8 +19,8 @@ class result5 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Image.asset('assets/문어.png'),
+      backgroundColor: Colors.white, // 배경색을 흰색으로 설정
+      body: Image.asset('assets/문어.png'), // assets 폴더에 있는 이미지를 보여줌
     );
   }
 }
