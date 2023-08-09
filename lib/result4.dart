@@ -25,7 +25,7 @@ class _result4State extends State<result4> {
     "윤재형.jpg",
     "광민이형.jpg",
     "용우형.jpg",
-    // Add more valid photo names here (assuming they are in the assets folder)
+    // 더 많은 사진 이름을 여기에 추가 (assets 폴더에 있는 것으로 가정)
   ];
   List<String> comments = [
     "ㅎㅎ",
@@ -54,7 +54,7 @@ class _result4State extends State<result4> {
   Widget buildCircleAvatar(String imageName) {
     return CircleAvatar(
       backgroundColor: Colors.grey,
-      backgroundImage: AssetImage("assets/$imageName"),
+      backgroundImage: AssetImage("assets/$imageName"), // 프로필 이미지 가져오기
       radius: 25,
     );
   }
