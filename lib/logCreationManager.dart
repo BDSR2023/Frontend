@@ -2,6 +2,30 @@ import 'package:flutter/material.dart';
 
 //logCreationsBase 변수는 여기 저장해서 쓰시면 됩니다.
 
+
+//할당할 변수 필요시:
+//String _selectedYear 를 예시로 들겠습니다.
+//1) String _selectedYear = '2023';   ===>   변수 초기값 할당.
+//
+//2) String get selectedYear => _selectedYear;   ===>   Provider 클래스 밖에서 사용해야 할 경우 get을 통해 불러옵니다.
+//(Provider 클래스 밖에서 selectedYear사용시, _selectedYear 값을 불러와 줍니다.)
+//
+//3) void updateSelectedYear(String newYear) {
+//     _selectedYear = newYear;
+//     notifyListeners(); // 상태가 변경되었음을 알려주기 위해 notifyListeners() 호출
+//   }
+//   ===>   _selectedYear의 값을 업데이트 하고 싶을 경우, 따로 함수를 호출해서 업데이트 해줘야 합니다.
+//
+
+//LogCreationManager밖에서 읽고 쓰기시:
+//LogCreationManager의 변수를 쓰고싶다면,
+//1) final logCreationManager = Provider.of<LogCreationManager>(context); 을 선언해줍니다.
+//2) logCreationManager.selectedYear;을 해주시면 LogCreationManager에서 불러와집니다.
+//3) logCreationManager.updateSelectedYear(value!); 함수를 불러와서 업데이트 할 수 있습니다.
+
+
+
+
 // logCreationsBase Provider 클래스
 class LogCreationManager extends ChangeNotifier {
 
