@@ -5,8 +5,7 @@ import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 
 
-//사진저장후 Provider에 저장하고, 결과창에서 보여주는 로직이 필요합니다.
-//logCreationBase를 참고해주세요.
+//사진저장후 path_provider에 저장하고, 결과창에서 보여주는 로직이 필요합니다.
 
 //CustomPainter위젯.
 
