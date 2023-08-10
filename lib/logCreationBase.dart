@@ -16,19 +16,22 @@ import 'logCreationManager.dart';
 //여기서의(logCreation1~8) 변수들은 logCreationManager.dart에 저장됩니다.
 //provider사용법을 참고해주세요.
 
-//PageView()로 슬라이드 구현.
+//PageView()로 슬라이드 구현했음.
 //각 logCreation1~8마다 DefaultTextStyle()로 폰트 설정.
 //logCraetion7과 8은 순서가 바뀌어 있는데, 바꿔야 할것 같습니다.
 //logCreation7은 수정필요.(Notion 9주차 회의)
 
+//해야할 일:
 //logCreation 1, 8번 의 TextField()에서의 변수할당을 설정해 주셔야 할 것 같습니다.
 //(logCreationManager.dart에 변수 할당 필요)
 //(logCreationManager.dart에 따로 적어 놓겠습니다.)
 
-//마지막 부분에 결과창을 붙여주셔야 할 것 같습니다. 
+//마지막 부분에 결과창을 붙여주셔야 할 것 같습니다. (resultPage)
 //(resultPage1~5인지, result_frame을 붙여야 하는지는 준이에게 물어봐야 할 것 같습니다.)
+//결과창에서 logCreation1~8까지의 logCreationManager에 저장된 값을 불러와서 보여줘야 할 것 같습니다. (노가다필요) logCreationManager.dart를 참고해주세요
 
-//전체적으로 글자크기를 조금 줄여달라는 요청이 있었습니다.
+//전체적으로 글자크기를 조금 줄여달라는 요청이 있었습니다. 
+
 
 
 //위의 동그랑미 이동 위젯.
