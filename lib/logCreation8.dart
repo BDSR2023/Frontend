@@ -237,7 +237,8 @@ class _logCreation8State extends State<logCreation8> {
                 SizedBox(height: 10,),
                 SizedBox(
                   height: MediaQuery.of(context).size.height/7,
-                  child: Stack(
+                  child: Stack(  //여기서부터 Stack()으로 구현했기에, 애매한 감이 있습니다. 조금씩 조정해 주세요.
+                    //Stack() 에서는 Positioned()로 위치를 정하고 Stack()의 children[] 에서 뒤에있는 아이들일수록 앞으로 먼저 나와서 보이게 됩니다.
                     children: [
                       Positioned(
                         top: 0,
@@ -332,7 +333,9 @@ class _logCreation8State extends State<logCreation8> {
                           ),
                         ),
                       ),
-                      if (_selectedFollowers.isNotEmpty)
+                      //만약 @가 입력되면, 위의 함수를 통해 감지후, 친구창을 보여주는데, 친구창이 조금 잘리고,
+                      //친구 선택후, 커서가 맨 뒤로 안오고 엉뚱한데 가는 문제가 있습니다.
+                      if (_selectedFollowers.isNotEmpty) 
                         Positioned(
                           top: 0,
                           child: Container(
