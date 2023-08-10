@@ -5,6 +5,10 @@ import 'package:logbook/optionPage.dart';
 import 'profile.dart';
 
 
+//홈페이지 입니다.
+//스크롤 기능, 설정버튼 추가 필요 (지금은 임시로 알림버튼에 설정페이지를 연결해 뒀습니다.)
+//로그북 보여주는 기능 필요
+
 class homePage extends StatefulWidget {
   const homePage({Key? key}) : super(key: key);
 
