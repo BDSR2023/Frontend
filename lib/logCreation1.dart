@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'logCreationManager.dart';
 
 
+//TextField에 컨트롤러를 붙여서 onChanged() 마다 변수를 새로고침해서 할당 해주셔야 할 것 같습니다.
+
 class logCreation1 extends StatefulWidget {
   const logCreation1({Key? key}) : super(key: key);
 
@@ -18,11 +20,11 @@ class _logCreation1State extends State<logCreation1> {
   ,'18','19','20','21','22','23','24','25','26','27','28','29','30','31'];
   var weathers = ['sunny', 'cloudy', 'cloudy2', 'rainy', 'snow', 'lightning', 'windy', 'night'];
 
-  String? selectedYear;
-  String? selectedMonth;
-  String? selectedDay;
-  String? selectedRegion;
-  String? selectedWeather;
+  String? selectedYear; //선택된 년도
+  String? selectedMonth; //선택된 달
+  String? selectedDay; //선택된 일
+  String? selectedRegion; //선택된 지역
+  String? selectedWeather; //선택된 날씨
 
   var buttonColor = [Colors.white,Colors.white,Colors.white,Colors.white,
     Colors.white,Colors.white,Colors.white,Colors.white];
