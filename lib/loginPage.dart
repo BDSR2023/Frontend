@@ -4,6 +4,10 @@ import 'package:logbook/homePage.dart';
 import 'package:http/http.dart' as http;
 
 
+//카카오톡 로그인 버튼의 이미지를 다시 설정해줘야 할 것 같습니다.
+//회원가입페이지 연결 로직 구현이 필요합니다.
+//아래 fetchData()가 있기는 한데 참고만 해주세요..
+//var token에 token값을 넣어야 합니다.
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -126,7 +130,7 @@ class LoginPage extends StatelessWidget {
                                 MaterialPageRoute(builder: (context) => signup()),
                               );
                             } else */ print('to homePage');
-                            if (await AuthApi.instance.hasToken()) {
+                            if (await AuthApi.instance.hasToken()) { //만약에 토큰이 유효하면 homePage()로 이동. 여기서 로그인 api를 써야할 것 같습니다.
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) => homePage()),
