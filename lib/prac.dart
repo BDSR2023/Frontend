@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+
+//연습용 파일 지워도됨.
+
 class logCreation8 extends StatefulWidget {
 
   @override
