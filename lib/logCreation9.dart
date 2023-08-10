@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+
+//여기서는 사진저장이 필요합니다. (api로 넘겨줘야함)
+
 class logCreation9 extends StatelessWidget {
   const logCreation9({Key? key}) : super(key: key);
 
