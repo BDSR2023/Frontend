@@ -12,6 +12,8 @@ import 'profile.dart';
 
 //로그작성 페이지 수정을 위해, logCreationBase.dart로 이동해주세요.
 
+//그리고, 준이가 만든 페이지들의 연결이 진행되지 않았습니다. (profile() 만 되어있음.)
+
 class homePage extends StatefulWidget {
   const homePage({Key? key}) : super(key: key);
 
