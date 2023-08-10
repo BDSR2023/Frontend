@@ -23,8 +23,10 @@ class homePage extends StatefulWidget {
 
 class _HomePageState extends State<homePage> {
 
-  var diveLevel = 'advanced';
-  var diveTimes = 13;
+  var diveLevel = 'advanced'; //다이빙 레벨
+  var diveTimes = 13; //다이빙 횟수
+  //둘다 api로 불러와야 할듯 싶습니다.
+  //아니면 불러온 값을 Provider에 저장해야 할 수도 있겠습니다.
 
   @override
   Widget build(BuildContext context) {
