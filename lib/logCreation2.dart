@@ -3,6 +3,11 @@ import 'package:provider/provider.dart';
 import 'logCreationManager.dart';
 
 
+//버튼 클릭때마다 selectedDivingForms를 0또는 1로 바꿔줍니다.
+//그동시에, logCerationManager에 써줍니다.
+//다시 생각해보면 쌩 노가다 한 것 같습니다.
+//간결하게 하기위해 onPressed: () { } 안의 내용을 함수로 바꿔 코드를 간결화 할 수도 있습니다.
+//logCreation2~8까지 동일하게 비효율적인 코드입니다.
 
 class logCreation2 extends StatefulWidget {
   const logCreation2({Key? key}) : super(key: key);
@@ -27,7 +32,7 @@ class _logCreation2State extends State<logCreation2> {
     Color(0xff000000),Color(0xff000000),Color(0xff000000),Color(0xff000000),Color(0xff000000),
     Color(0xff000000),Color(0xff000000),Color(0xff000000),];
 
-  List<int> selectedDivingForms = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];//보트,비치,DPR
+  List<int> selectedDivingForms = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; //보트,비치,DPR,섬,리브어보드,고도,난파선,아이스,드라이슈트,케이브,케빈,조류,교육야간,동영상,사진,대심도,기타
 
   @override
   void initState() {
