@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 
 //할당할 변수 필요시:
-//String _selectedYear 를 예시로 들겠습니다.
+//String _selectedYear 를 예시로 들겠습니다. (logCreation1을 참고해주세요.)
 //1) String _selectedYear = '2023';   ===>   변수 초기값 할당.
 //
 //2) String get selectedYear => _selectedYear;   ===>   Provider 클래스 밖에서 사용해야 할 경우 get을 통해 불러옵니다.
