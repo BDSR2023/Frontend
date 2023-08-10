@@ -9,7 +9,10 @@ import 'logCreationManager.dart';
 //서명칸을 누르면 signPage위젯이 push됩니다.
 
 //logCreation8에서 스탬프 이미지 첨부와 다이빙사진추가 버튼을 눌렀을때,
-//화면수정과 변수저장하는법 필요.
+//화면수정이 필요합니다.
+//아직 logCreation8의 변수들을 logCreationManager에 저장하지 않았습니다. 연결 부탁드립니다.
+//logCreation1과 logCreationManager를 참고해주세요.
+//아마 변수를 선언하고, TextField에 컨트롤러를 붙여, logCreation8의 변수와 logCreationManager안의 변수 둘다 동시에 컨트롤 해야 할겁니다.
 
 class logCreation8 extends StatefulWidget {
   const logCreation8({Key? key}) : super(key: key);
