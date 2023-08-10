@@ -59,6 +59,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
 
 
+//위의 위젯 불러와서 앱바에서 쓰기.
 class logCreationsBase extends StatefulWidget {
   const logCreationsBase({Key? key}) : super(key: key);
 
