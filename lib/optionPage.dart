@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'accountInformationPage.dart';
 
 
+//Stack()으로 기본적인 틀정도는 만들어 뒀습니다.
+//나중에 배경으로 사진적용 필요합니다.
+//각각의 글자들은 GestureDetector()로 클릭되게 했습니다.
+
 class optionPage extends StatelessWidget {
   const optionPage({Key? key}) : super(key: key);
 
