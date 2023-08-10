@@ -4,6 +4,12 @@ import 'dart:ui' as ui;
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 
+
+//사진저장후 Provider에 저장하고, 결과창에서 보여주는 로직이 필요합니다.
+//logCreationBase를 참고해주세요.
+
+//CustomPainter위젯.
+
 class MyCustomPainter extends CustomPainter {
   List<Offset> points = [];
 
@@ -33,6 +39,7 @@ class MyCustomPainter extends CustomPainter {
 
 
 //위의 MyCustomPainter를 가져옵니다.
+
 class MyDrawingBoard extends StatefulWidget {
   @override
   _MyDrawingBoardState createState() => _MyDrawingBoardState();
