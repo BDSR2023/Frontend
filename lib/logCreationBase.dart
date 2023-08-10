@@ -21,12 +21,14 @@ import 'logCreationManager.dart';
 //logCraetion7과 8은 순서가 바뀌어 있는데, 바꿔야 할것 같습니다.
 //logCreation7은 수정필요.(Notion 9주차 회의)
 
-//logCreation1, 8번 의 TextField()에서의 변수할당을 설정해 주셔야 할 것 같습니다.
+//logCreation 1, 8번 의 TextField()에서의 변수할당을 설정해 주셔야 할 것 같습니다.
 //(logCreationManager.dart에 변수 할당 필요)
 //(logCreationManager.dart에 따로 적어 놓겠습니다.)
 
 //마지막 부분에 결과창을 붙여주셔야 할 것 같습니다. 
 //(resultPage1~5인지, result_frame을 붙여야 하는지는 준이에게 물어봐야 할 것 같습니다.)
+
+//전체적으로 글자크기를 조금 줄여달라는 요청이 있었습니다.
 
 
 //위의 동그랑미 이동 위젯.
